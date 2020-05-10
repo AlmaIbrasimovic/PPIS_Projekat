@@ -4,6 +4,27 @@ import loginSlika from "../logo.png";
 export class Register extends React.Component {
     constructor (props) {
         super(props);
+        this.state = {
+            username: '',
+            password: '',
+            email: ''
+        };
+    }
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
+
+    register = () => {
+        if (this.state.password === '' || this.state.email === '' || this.state.username === '') {
+            alert("Molimo unesite sve podatke!")
+        }
+        else {
+            alert("Sve OK!");
+        }
+
     }
 
     render() {
@@ -16,20 +37,30 @@ export class Register extends React.Component {
                 <div className="forma">
                     <div className="form-grupa">
                         <label htmlFor="username">Korisničko ime</label>
-                        <input type="text" name="username"/>
+                        <input type="text" 
+                        name="username"
+                        value={this.state.username} 
+                        onChange={e => this.handleChange(e)}
+                        />
                     </div>
                     <div className="form-grupa">
                         <label htmlFor="password">E-mail adresa</label>
-                        <input type="email" name="email"/>
+                        <input type="email" name="email"
+                        value={this.state.email} 
+                        onChange={e => this.handleChange(e)}
+                        />
                     </div>
                     <div className="form-grupa">
                         <label htmlFor="password">Lozinka</label>
-                        <input type="password" name="password"/>
+                        <input type="password" name="password"
+                        value={this.state.password} 
+                        onChange={e => this.handleChange(e)}
+                        />
                     </div>
                 </div>
             </div>
             <div className="footer">
-                <button type="button" className="btn">
+                <button type="button" className="btn" onClick={this.register}>
                     Register
                 </button>
             </div>
