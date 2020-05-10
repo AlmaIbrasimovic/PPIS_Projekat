@@ -1,7 +1,9 @@
 import React from "react";
 import "./App.scss";
 import { Login, Register } from "./Login/index";
+import { Korisnici, Tabela } from "./Korisnici/index";
 
+/*
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -68,4 +70,14 @@ const RightSide = props => {
   );
 };
 
+export default App;
+*/
+
+function App() {
+  return(
+    <div className="App">
+      <Korisnici/>
+    </div>
+  );
+}
 export default App;
