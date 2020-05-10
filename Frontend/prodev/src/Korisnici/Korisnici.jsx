@@ -11,7 +11,9 @@ export class Korisnici extends Component {
                 {prezime: "Kasum", ime: "Lejla", uloga: "Kupac", obrisati: false},
                 {prezime: "Jureta", ime: "Dolores", uloga: "Kupac", obrisati: false}
             ],
-            brisati: false,
+            ime: '',
+            prezime: '',
+            uloga:''
         };
     }
 
@@ -24,6 +26,13 @@ export class Korisnici extends Component {
         for (var i = 0; i<TEMP.length; i++) {
             if(TEMP[i].obrisati) TEMP.splice(i, 1);
         }
+        this.setState({Korisnici:TEMP})
+    }
+
+    kreirajKorisnika = () => {
+        var TEMP = [...this.state.Korisnici];
+        const temp = {prezime: this.state.prezime, ime: this.state.ime, uloga: this.state.uloga, obrisati: false}
+        TEMP.push(temp);
         this.setState({Korisnici:TEMP})
     }
      
@@ -55,7 +64,13 @@ export class Korisnici extends Component {
         return header.map((key, index) => {
            return <th key={index}>{key.toUpperCase()}</th>
         })
-     }
+    }
+
+    unosNovog = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
     
     render() {
         return (
@@ -72,7 +87,33 @@ export class Korisnici extends Component {
                     Obriši korisnika
                 </button>
             </div>
-         </div>
+            <div className="forma">
+                <div className="form-grupa">
+                    <label htmlFor="username">Ime:</label>
+                    <input type="text"
+                    name="ime"
+                    value={this.state.ime} 
+                    onChange={e => this.unosNovog(e)}/>
+                </div>
+                <div className="form-grupa">
+                    <label htmlFor="username">Prezime:</label>
+                    <input type="text"
+                    name="prezime"
+                    value={this.state.prezime} 
+                    onChange={e => this.unosNovog(e)}/>
+                </div>
+                <div className="form-grupa">
+                    <label htmlFor="username">Uloga:</label>
+                    <input type="text" 
+                    name="uloga"
+                    value={this.state.uloga} 
+                    onChange={e => this.unosNovog(e)}/>
+                </div>
+                <button type="button" className="btn"  onClick={this.kreirajKorisnika}>
+                    Dodavanje novog korisnika
+                </button>
+            </div>
+            </div>
         )
     }
 }

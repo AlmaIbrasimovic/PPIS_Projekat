@@ -3,6 +3,8 @@ import "./App.scss";
 import { Login, Register } from "./Login/index";
 import { Korisnici, Tabela } from "./Korisnici/index";
 
+
+// Odkomentirati za login
 /*
 class App extends React.Component {
   constructor(props) {
@@ -73,6 +75,8 @@ const RightSide = props => {
 export default App;
 */
 
+
+// Za listu korisnika
 function App() {
   return(
     <div className="App">
