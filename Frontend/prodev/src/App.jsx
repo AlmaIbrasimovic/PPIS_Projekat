@@ -2,6 +2,7 @@ import React from "react";
 import "./App.scss";
 import { Login, Register } from "./Login/index";
 import { Korisnici, Tabela } from "./Korisnici/index";
+import { Uloge } from "./Uloge/index";
 
 
 // Odkomentirati za login
@@ -75,12 +76,23 @@ const RightSide = props => {
 export default App;
 */
 
-
+/*
 // Za listu korisnika
 function App() {
   return(
     <div className="App">
       <Korisnici/>
+    </div>
+  );
+}
+export default App;
+*/
+
+// Za listu uloga
+function App() {
+  return(
+    <div className="App">
+      <Uloge/>
     </div>
   );
 }
