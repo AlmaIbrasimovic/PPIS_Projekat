@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class RoleController {
@@ -30,4 +31,10 @@ public class RoleController {
     HashMap<String,String> deleteRole(@PathVariable Integer id) throws Exception {
         return roleService.deleteRole(id);
     }
+
+    @GetMapping("/role/all")
+    List<Role> allRoles() {
+        return roleService.getAllRoles();
+    }
+
 }

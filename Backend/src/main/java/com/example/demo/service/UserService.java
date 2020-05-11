@@ -47,7 +47,6 @@ public class UserService {
         if (!userRepository.existsById(id)) {
             throw new Exception("Obrisan user sa id-em "+id);
         }
-        deleteDependencies(id);
         userRepository.deleteById(id);
         return new ResponseMessageDTO("Uspjesno obrisan korisnik sa id-em " + id).getHashMap();
     }
