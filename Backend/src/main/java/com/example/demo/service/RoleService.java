@@ -6,7 +6,9 @@ import com.example.demo.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 public class RoleService {
@@ -38,4 +40,11 @@ public class RoleService {
         roleRepository.deleteById(id);
         return new ResponseMessageDTO("Uspjesno obrisana uloga sa id-em "+id).getHashMap();
     }
+
+    public List<Role> getAllRoles() {
+        List<Role> sveUloge = new ArrayList<>();
+        roleRepository.findAll().forEach(sveUloge::add);
+        return sveUloge;
+    }
+
 }
