@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.ppis.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -15,7 +15,7 @@ public class User {
     @Pattern(regexp = "[\\w\\d]{3,}", message = "Username može sadržati najmanje 3 slova ili/i broja")
     private String username;
 
-    @Pattern(regexp = "[\\w\\d]{7,}", message = "Sifra mora imati minimalno 7 znakova (slova ili brojeva)")
+    //@Pattern(regexp = "[\\w\\d]{7,}", message = "Sifra mora imati minimalno 7 znakova (slova ili brojeva)")
     private String password;
 
     @Pattern(regexp = "^(.+)@(.+)$", message = "Email nije dobrog formata")
@@ -26,7 +26,7 @@ public class User {
 
     public User() {}
 
-    public User(@Pattern(regexp = "[\\w\\d]{3,}", message = "Username može sadržati najmanje 3 slova ili/i broja") String username, @Pattern(regexp = "[\\w\\d]{7,}", message = "Sifra mora imati minimalno 7 znakova (slova ili brojeva)") String password, @Pattern(regexp = "^(.+)@(.+)$", message = "Email nije dobrog formata") String email, List<Role> roleList) {
+    public User(@Pattern(regexp = "[\\w\\d]{3,}", message = "Username može sadržati najmanje 3 slova ili/i broja") String username, String password, @Pattern(regexp = "^(.+)@(.+)$", message = "Email nije dobrog formata") String email, List<Role> roleList) {
         this.username = username;
         this.password = password;
         this.email = email;

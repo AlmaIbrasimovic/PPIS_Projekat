@@ -1,6 +1,6 @@
-package com.example.demo.repository;
+package com.example.ppis.repository;
 
-import com.example.demo.model.Role;
+import com.example.ppis.model.Role;
 import org.springframework.data.repository.CrudRepository;
 
 public interface RoleRepository extends CrudRepository<Role,Integer> {

@@ -1,8 +1,13 @@
-package com.example.demo.service;
+package com.example.ppis.service;
 
-import com.example.demo.dto.ResponseMessageDTO;
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
+import com.example.ppis.dto.ResponseMessageDTO;
+import com.example.ppis.dto.UserLoginDTO;
+import com.example.ppis.dto.UserRegisterDTO;
+import com.example.ppis.dto.UserRoleDTO;
+import com.example.ppis.model.Role;
+import com.example.ppis.model.User;
+import com.example.ppis.repository.RoleRepository;
+import com.example.ppis.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,17 +15,30 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public User register(User newUser) {
+    public User register(UserRegisterDTO userRegisterDTO) {
+        User newUser = new User(userRegisterDTO.getUsername(),userRegisterDTO.getPassword(),userRegisterDTO.getEmail(),getRoles(userRegisterDTO.getRoleList()));
         newUser.setPassword(hashPassword(newUser.getPassword()));
         return userRepository.save(newUser);
+    }
+
+    private List<Role> getRoles(List<UserRoleDTO> roleDTOS) {
+        List<Role> roles = new ArrayList<>();
+        for (UserRoleDTO role: roleDTOS) {
+            Optional<Role> _role = roleRepository.findById(role.getRoleId());
+            _role.ifPresent(roles::add);
+        }
+        return roles;
     }
 
     private String hashPassword(String password) {
@@ -32,11 +50,11 @@ public class UserService {
         return passwordEncoder.matches(plainText, hashPassword);
     }
 
-    public HashMap<String, String> login(User user) throws Exception {
-        User userWithEmail = userRepository.findByEmail(user.getEmail());
+    public HashMap<String, String> login(UserLoginDTO user) throws Exception {
+        User userWithEmail = userRepository.findByUsername(user.getUsername());
 
         if (userWithEmail == null) {
-            throw new Exception("Korisnik s emailom " + user.getEmail() + " ne postoji");
+            throw new Exception("Korisnik s usernameom " + user.getUsername() + " ne postoji");
         } else if (!matchPasswords(user.getPassword(), userWithEmail.getPassword())) {
             throw new Exception("Pogresna sifra!");
         }

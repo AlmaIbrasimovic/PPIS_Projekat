@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.ppis.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -15,8 +15,8 @@ public class Role {
     @NotBlank
     private String name;
 
-    @ManyToMany
-    private List<User> usersWithRole;
+ //   @ManyToMany
+ //   private List<User> usersWithRole;
 
     public Role() {}
 
@@ -40,20 +40,20 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUsersWithRole() {
+  /*  public List<User> getUsersWithRole() {
         return usersWithRole;
     }
 
     public void setUsersWithRole(List<User> usersWithRole) {
         this.usersWithRole = usersWithRole;
-    }
+    }*/
 
     @Override
     public String toString() {
         return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", usersWithRole=" + usersWithRole +
+               // ", usersWithRole=" + usersWithRole +
                 '}';
     }
 }

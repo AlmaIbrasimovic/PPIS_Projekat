@@ -1,9 +1,9 @@
-package com.example.demo;
+package com.example.ppis;
 
-import com.example.demo.model.Role;
-import com.example.demo.model.User;
-import com.example.demo.repository.RoleRepository;
-import com.example.demo.repository.UserRepository;
+import com.example.ppis.model.Role;
+import com.example.ppis.model.User;
+import com.example.ppis.repository.RoleRepository;
+import com.example.ppis.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

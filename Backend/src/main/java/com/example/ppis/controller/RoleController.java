@@ -1,7 +1,8 @@
-package com.example.demo.controller;
+package com.example.ppis.controller;
 
-import com.example.demo.model.Role;
-import com.example.demo.service.RoleService;
+import com.example.ppis.dto.RoleDTO;
+import com.example.ppis.model.Role;
+import com.example.ppis.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class RoleController {
 
     @PostMapping("/role")
     @ResponseStatus(HttpStatus.CREATED)
-    Role addRole(@RequestBody @Valid Role role) {
+    Role addRole(@RequestBody RoleDTO role) {
         return roleService.addNewRole(role);
     }
 
