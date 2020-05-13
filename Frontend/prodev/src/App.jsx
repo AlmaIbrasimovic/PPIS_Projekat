@@ -3,6 +3,9 @@ import "./App.scss";
 import { Login, Register } from "./Login/index";
 import { Korisnici, Tabela } from "./Korisnici/index";
 import { Uloge } from "./Uloge/index";
+import { Vjestine } from "./Vjestine/index";
+import { Tipovi } from "./TipoviVjestina/index";
+import { TipoviEdukacija } from "./TipoviEdukacija/index"
 
 
 // Odkomentirati za login
@@ -88,11 +91,43 @@ function App() {
 export default App;
 */
 
+/*
 // Za listu uloga
 function App() {
   return(
     <div className="App">
       <Uloge/>
+    </div>
+  );
+}
+*/
+ /*
+// Za listu vjestina
+function App() {
+  return(
+    <div className="App">
+      <Vjestine/>
+    </div>
+  );
+}
+*/
+
+/*
+// Za listu tipova vjestina
+function App() {
+  return(
+    <div className="App">
+      <Tipovi/>
+    </div>
+  );
+}
+*/
+
+// Za listu tipova edukacija
+function App() {
+  return(
+    <div className="App">
+      <TipoviEdukacija/>
     </div>
   );
 }
