@@ -20,7 +20,7 @@ public class Skill {
     public Skill() {
     }
 
-    public Skill(Integer id, @NotBlank String name, SkillType skillType) {
+    public Skill(@NotBlank String name, SkillType skillType) {
         this.id = id;
         this.name = name;
         this.skillType = skillType;

@@ -17,7 +17,7 @@ public class SkillType {
     public SkillType() {
     }
 
-    public SkillType(Integer id, @NotBlank String name) {
+    public SkillType(@NotBlank String name) {
         this.id = id;
         this.name = name;
     }

@@ -1,8 +1,12 @@
 package com.example.ppis;
 
 import com.example.ppis.model.Role;
+import com.example.ppis.model.Skill;
+import com.example.ppis.model.SkillType;
 import com.example.ppis.model.User;
 import com.example.ppis.repository.RoleRepository;
+import com.example.ppis.repository.SkillRepository;
+import com.example.ppis.repository.SkillTypeRepository;
 import com.example.ppis.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +28,10 @@ public class PpisProjekatApplication {
 	}
 
 	@Bean
-	public CommandLineRunner addData(UserRepository userRepository, RoleRepository roleRepository) {
+	public CommandLineRunner addData(UserRepository userRepository,
+									 RoleRepository roleRepository,
+									 SkillTypeRepository skillTypeRepository,
+									 SkillRepository skillRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("korisnik"));
@@ -47,6 +54,30 @@ public class PpisProjekatApplication {
 			for (User user : userRepository.findAll()) {
 				log.info(user.getUsername());
 			}
+			log.info(" ");
+
+			//tipovi skilova
+			List<SkillType> skillTypes = new ArrayList<>();
+			SkillType skillType1 = skillTypeRepository.save(new SkillType("Razvoj softvera"));
+			SkillType skillType2 = skillTypeRepository.save(new SkillType("Soft vještine"));
+			SkillType skillType3 = skillTypeRepository.save(new SkillType("Mreže"));
+
+			log.info("Svi tipovi vještina \n");
+			for (SkillType skillType : skillTypeRepository.findAll()) {
+				log.info(skillType.getName());
+			}
+			log.info(" ");
+
+			//vještine
+			Skill skill1 = skillRepository.save(new Skill("Java programiranje", skillType1));
+			Skill skill2 = skillRepository.save(new Skill("React programiranje", skillType1));
+			Skill skill3 = skillRepository.save(new Skill("Prezentacija", skillType2));
+
+			log.info("Sve vještine \n");
+			for (Skill skill : skillRepository.findAll()) {
+				log.info(skill.getName() + " Tip vještine: " + skill.getSkillType().getName());
+			}
+			log.info(" ");
 		};
 	}
 
