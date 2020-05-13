@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @SpringBootApplication
@@ -26,7 +27,8 @@ public class PpisProjekatApplication {
 									 RoleRepository roleRepository,
 									 SkillTypeRepository skillTypeRepository,
 									 SkillRepository skillRepository,
-									 EducationTypeRepository educationTypeRepository) {
+									 EducationTypeRepository educationTypeRepository,
+									 EducationRepository educationRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("korisnik"));
@@ -81,6 +83,16 @@ public class PpisProjekatApplication {
 			log.info("Svi tipovi edukacija \n");
 			for (EducationType educationType : educationTypeRepository.findAll()) {
 				log.info(educationType.getName());
+			}
+			log.info(" ");
+
+			//edukacije
+			Education education1 = educationRepository.save(new Education(skill1, educationType1, "Java for Beginners", "Niko Nikic", new Date()));
+			Education education2 = educationRepository.save(new Education(skill2, educationType2, "SPA in React", "Marko Markovic", new Date()));
+
+			log.info("Sve edukacije \n");
+			for (Education education : educationRepository.findAll()) {
+				log.info(education.toString());
 			}
 			log.info(" ");
 		};
