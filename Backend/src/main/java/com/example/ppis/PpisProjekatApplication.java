@@ -1,13 +1,7 @@
 package com.example.ppis;
 
-import com.example.ppis.model.Role;
-import com.example.ppis.model.Skill;
-import com.example.ppis.model.SkillType;
-import com.example.ppis.model.User;
-import com.example.ppis.repository.RoleRepository;
-import com.example.ppis.repository.SkillRepository;
-import com.example.ppis.repository.SkillTypeRepository;
-import com.example.ppis.repository.UserRepository;
+import com.example.ppis.model.*;
+import com.example.ppis.repository.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -31,7 +25,8 @@ public class PpisProjekatApplication {
 	public CommandLineRunner addData(UserRepository userRepository,
 									 RoleRepository roleRepository,
 									 SkillTypeRepository skillTypeRepository,
-									 SkillRepository skillRepository) {
+									 SkillRepository skillRepository,
+									 EducationTypeRepository educationTypeRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("korisnik"));
@@ -76,6 +71,16 @@ public class PpisProjekatApplication {
 			log.info("Sve vještine \n");
 			for (Skill skill : skillRepository.findAll()) {
 				log.info(skill.getName() + " Tip vještine: " + skill.getSkillType().getName());
+			}
+			log.info(" ");
+
+			//tipovi edukacije
+			EducationType educationType1 = educationTypeRepository.save(new EducationType("Interna"));
+			EducationType educationType2 = educationTypeRepository.save(new EducationType("Eksterna"));
+
+			log.info("Svi tipovi edukacija \n");
+			for (EducationType educationType : educationTypeRepository.findAll()) {
+				log.info(educationType.getName());
 			}
 			log.info(" ");
 		};
