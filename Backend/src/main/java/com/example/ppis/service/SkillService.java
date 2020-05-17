@@ -1,8 +1,12 @@
 package com.example.ppis.service;
 
 import com.example.ppis.dto.ResponseMessageDTO;
+import com.example.ppis.dto.SkillDTO;
+import com.example.ppis.model.Employee;
+import com.example.ppis.model.EmployeeSkill;
 import com.example.ppis.model.Skill;
 import com.example.ppis.model.SkillType;
+import com.example.ppis.repository.EmployeeSkillRepository;
 import com.example.ppis.repository.SkillRepository;
 import com.example.ppis.repository.SkillTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +24,9 @@ public class SkillService {
 
     @Autowired
     SkillTypeRepository skillTypeRepository;
+
+    @Autowired
+    EmployeeSkillRepository employeeSkillRepository;
 
     public List<Skill> getAll() {
         List<Skill> all = new ArrayList<>();
@@ -64,5 +71,19 @@ public class SkillService {
 
         skillRepository.deleteById(id);
         return new ResponseMessageDTO("Uspjesno obrisana vjestina sa id-em " + id).getHashMap();
+    }
+
+    public List<Employee> getEmployeesBySkill(Integer id) throws Exception {
+        if (!skillRepository.existsById(id)) {
+            throw new Exception("Vještina sa id-em " + id + " ne postoji");
+        }
+
+        List<Employee> employees = new ArrayList<>();
+        for (EmployeeSkill employeeSkill : employeeSkillRepository.findAll()) {
+            if(employeeSkill.getSkill().getId() == id) {
+                employees.add(employeeSkill.getEmployee());
+            }
+        }
+        return employees;
     }
 }

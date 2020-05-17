@@ -28,7 +28,9 @@ public class PpisProjekatApplication {
 									 SkillTypeRepository skillTypeRepository,
 									 SkillRepository skillRepository,
 									 EducationTypeRepository educationTypeRepository,
-									 EducationRepository educationRepository) {
+									 EducationRepository educationRepository,
+									 EmployeeRepository employeeRepository,
+									 EmployeeSkillRepository employeeSkillRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("korisnik"));
@@ -93,6 +95,27 @@ public class PpisProjekatApplication {
 			log.info("Sve edukacije \n");
 			for (Education education : educationRepository.findAll()) {
 				log.info(education.toString());
+			}
+			log.info(" ");
+
+			//uposlenici
+			Employee employee1 = employeeRepository.save(new Employee("Ivo", "Ivic", new Date(), new Date()));
+			Employee employee2 = employeeRepository.save(new Employee("Maja", "Majic", new Date(), new Date()));
+
+			log.info("Svi uposlenici \n");
+			for (Employee employee : employeeRepository.findAll()) {
+				log.info(employee.getFirstName() + " " + employee.getLastName());
+			}
+			log.info(" ");
+
+			//skillovi kod uposlenika
+
+			EmployeeSkill employeeSkill1 = employeeSkillRepository.save(new EmployeeSkill(employee1, skill1, 5, new Date()));
+			EmployeeSkill employeeSkill2 = employeeSkillRepository.save(new EmployeeSkill(employee2, skill1, 10, new Date()));
+
+			log.info("Svi skilovi uposlenika \n");
+			for (EmployeeSkill employeeSkill : employeeSkillRepository.findAll()) {
+				log.info(employeeSkill.getSkill().getName());
 			}
 			log.info(" ");
 		};

@@ -1,5 +1,6 @@
 package com.example.ppis.controller;
 
+import com.example.ppis.model.Employee;
 import com.example.ppis.model.Skill;
 import com.example.ppis.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,10 @@ public class SkillController {
     @GetMapping("/skills")
     List<Skill> getAll() {
         return skillService.getAll();
+    }
+
+    @GetMapping("skills/{id}/employees")
+    List<Employee> getEmployees(@PathVariable Integer id) throws Exception {
+        return skillService.getEmployeesBySkill(id);
     }
 }

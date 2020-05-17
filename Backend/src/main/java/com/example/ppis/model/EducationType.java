@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "Education_Type")
 public class EducationType {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank
