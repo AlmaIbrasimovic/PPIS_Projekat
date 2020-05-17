@@ -2,6 +2,8 @@ import React from "react";
 import loginSlika from "../logo.png";
 import { withRouter, Redirect } from 'react-router-dom';
 import {browserHistory} from 'react-router';
+import { TipoviEdukacija } from "../TipoviEdukacija/TipoviEdukacija.jsx"
+
 
 export class Login extends React.Component {
     constructor (props) {
@@ -23,7 +25,8 @@ export class Login extends React.Component {
         else if  (this.state.username === '') alert('Molimo unesite vaše korisničko ime!');
         else if (this.state.password === '') alert('Molimo unesite vašu lozinku!');
         else {
-            alert('Sve OK');
+            alert('Sve OK');  
+            return <TipoviEdukacija />;
         }
     }
 

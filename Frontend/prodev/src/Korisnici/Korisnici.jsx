@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 export class Korisnici extends Component {
     constructor(props) {
         super (props)
         this.state = {
+            proba:[],
             Korisnici : [
                 {prezime: "Čogić", ime: "Lamija", uloga: "Kupac", obrisati: false},
                 {prezime: "Ibrašimović", ime: "Alma", uloga: "Kupac", obrisati: false},
@@ -33,7 +35,7 @@ export class Korisnici extends Component {
         var TEMP = [...this.state.Korisnici];
         const temp = {prezime: this.state.prezime, ime: this.state.ime, uloga: this.state.uloga, obrisati: false}
         TEMP.push(temp);
-        this.setState({Korisnici:TEMP})
+        this.setState({Korisnici:TEMP})  
     }
      
     prikazKorisnika() {

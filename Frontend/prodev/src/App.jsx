@@ -6,7 +6,8 @@ import { Uloge } from "./Uloge/index";
 import { Vjestine } from "./Vjestine/index";
 import { Tipovi } from "./TipoviVjestina/index";
 import { TipoviEdukacija } from "./TipoviEdukacija/index"
-
+import { Edukacije } from "./Edukacije/index"
+import { Uposlenici }  from "./Uposlenici/index"
 
 // Odkomentirati za login
 /*
@@ -76,11 +77,12 @@ const RightSide = props => {
   );
 };
 
-export default App;
-*/
+export default App;*/
 
-/*
+
+
 // Za listu korisnika
+/*
 function App() {
   return(
     <div className="App">
@@ -101,7 +103,9 @@ function App() {
   );
 }
 */
- /*
+ 
+
+/*
 // Za listu vjestina
 function App() {
   return(
@@ -122,12 +126,22 @@ function App() {
   );
 }
 */
-
+/*
 // Za listu tipova edukacija
+
 function App() {
   return(
     <div className="App">
       <TipoviEdukacija/>
+    </div>
+  );
+}
+export default App;*/
+
+function App() {
+  return(
+    <div className="App">
+      <Uposlenici/>
     </div>
   );
 }
