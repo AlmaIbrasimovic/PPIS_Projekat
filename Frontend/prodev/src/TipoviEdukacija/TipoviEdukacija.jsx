@@ -1,42 +1,61 @@
 import React, {Component} from 'react'
+import axios from 'axios'
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 export class TipoviEdukacija extends Component {
     constructor(props) {
         super (props)
         this.state = {
             TipoviEdukacija : [
-                {tip:"Interna", obrisati: false},
-                {tip:"Eksterna", obrisati: false},
+                {tip:"Interna", obrisati: false}
             ],
             tip:'',
+            tipovi:[]
         };
     }
 
+    componentWillMount() {
+        axios.get('http://localhost:8083/education-types')
+          .then(res => {
+            const tipovi = res.data;
+            this.setState({ tipovi });
+        })
+    }
     handleChange = (e, index) => {
-        this.state.TipoviEdukacija[index].obrisati = true;
+        this.state.id = this.state.tipovi[index].id;;
     }
 
     obrisiTip = () => {
-        var TEMP = [...this.state.TipoviEdukacija];
-        for (var i = 0; i<TEMP.length; i++) {
-            if(TEMP[i].obrisati) TEMP.splice(i, 1);
-        }
-        this.setState({TipoviEdukacija:TEMP})
+        axios.delete(`http://localhost:8083/education-types/${this.state.id}`)
+        .then(res => {
+            var TEMP = [...this.state.tipovi];
+            for (var i = 0; i<TEMP.length; i++) {
+                if(TEMP[i].obrisati) TEMP.splice(i, 1);
+            }
+        this.setState({tipovi:TEMP})
+        alert("Uspješno obrisan tip edukacije!");
+        })
     }
 
     kreirajTip = () => {
-        var TEMP = [...this.state.TipoviEdukacija];
-        const temp = {tip:this.state.tip, obrisati: false}
-        TEMP.push(temp);
-        this.setState({TipoviEdukacija:TEMP})
+            axios.post('http://localhost:8083/education-types', {
+              name:this.state.tip
+            })
+
+            var TEMP = [...this.state.tipovi];
+            const temp = {name:this.state.tip, obrisati: false}
+            TEMP.push(temp);
+            this.setState({tipovi:TEMP})
     }
 
     prikazTipova() {
-        return this.state.TipoviEdukacija.map((tipovi, index) => {
-           const {tip, obrisati} = tipovi
+        return this.state.tipovi.map((tipov, index) => {
+           const {name} = tipov
+           const obrisati=false
            return (
-              <tr key={tip}>
-                 <td>{tip}</td>
+              <tr key={name}>
+                 <td>{name}</td>
                  <td>{obrisati}
                  <div className="brisanje">
                         <label>

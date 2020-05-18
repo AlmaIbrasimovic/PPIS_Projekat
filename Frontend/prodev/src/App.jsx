@@ -105,7 +105,7 @@ function App() {
 */
  
 
-/*
+
 // Za listu vjestina
 function App() {
   return(
@@ -114,7 +114,7 @@ function App() {
     </div>
   );
 }
-*/
+
 
 /*
 // Za listu tipova vjestina
@@ -138,11 +138,12 @@ function App() {
 }
 export default App;*/
 
+/*
 function App() {
   return(
     <div className="App">
-      <Uposlenici/>
+      <Vjestine/>
     </div>
   );
-}
+}*/
 export default App;

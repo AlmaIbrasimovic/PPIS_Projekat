@@ -1,46 +1,115 @@
 import React, {Component} from 'react'
+import axios from 'axios'
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 export class Vjestine extends Component {
     constructor(props) {
         super (props)
         this.state = {
             Vjestine : [
-                {tip:"Razvoj softvera", vjestina: "Progamiranje u javi", obrisati: false},
-                {tip:"Razvoj softvera",vjestina: "Programiranje u reactu", obrisati: false},
-                {tip:"Mreže",vjestina: "Administracija mreža", obrisati: false},
-                {tip:"Soft vještine",vjestina: "Prezentacijske vještine", obrisati: false}
+                {tip:"", vjestina: "", obrisati: false},
             ],
+            Tipovivjestina: [], // Za popunjavanje tipova vjestina
+            vjestine:[],
             tip:'',
             vjestina: '',
+            temp:''
         };
     }
 
+    componentWillMount() {
+            /*
+            axios.get('http://localhost:8083/skills')
+                      .then(res => {
+                        const vjestine = res.data;
+                        this.setState({ vjestine });
+            })
+            */
+
+
+
+            axios.get('http://localhost:8083/skills')
+                          .then(res => {
+                            var temp=[];
+                            for (var i=0; i<res.data.length;i++) {
+                                temp.push({name: `${res.data[i].name}`, value: res.data[i].name, id: res.data[i].id, skillTypeId: res.data[i].skillType.id, skillTypeName: res.data[i].skillType.name});
+                            }
+                            this.setState({ vjestine:temp });
+            })
+
+            axios.get('http://localhost:8083/skill-types')
+              .then(res => {
+                var temp=[];
+                for (var i=0; i<res.data.length;i++) {
+                    temp.push({name: `${res.data[i].name}`, value: res.data[i].name, id: res.data[i].id});
+
+                }
+                this.setState({ Tipovivjestina:temp });
+            })
+    }
+
+
     handleChange = (e, index) => {
-        this.state.Vjestine[index].obrisati = true;
+            this.state.id = this.state.vjestine[index].id;;
     }
 
     obrisiVjestinu = () => {
-        var TEMP = [...this.state.Vjestine];
-        for (var i = 0; i<TEMP.length; i++) {
-            if(TEMP[i].obrisati) TEMP.splice(i, 1);
-        }
-        this.setState({Vjestine:TEMP})
+        axios.delete(`http://localhost:8083/skills/${this.state.id}`)
+                    .then(res => {
+                        var TEMP = [...this.state.vjestine];
+                        for (var i = 0; i<TEMP.length; i++) {
+                            if(TEMP[i].id === this.state.id) TEMP.splice(i, 1);
+                        }
+                        this.setState({vjestine:TEMP})
+                        alert("Uspješno obrisana vještina!");
+        })
+    }
+
+    handleChangeTipVjestine = (selectedOption) => {
+            if (selectedOption) {
+                this.setState({tip:selectedOption.value});
+                this.setState({temp:selectedOption});
+            }
     }
 
     kreirajVjestinu = () => {
-        var TEMP = [...this.state.Vjestine];
-        const temp = {tip:this.state.tip,vjestina: this.state.vjestina, obrisati: false}
-        TEMP.push(temp);
-        this.setState({Vjestine:TEMP})
+            var idVjestine = -1;
+
+            for (var i = 0; i<this.state.Tipovivjestina.length; i++) {
+                if (this.state.Tipovivjestina[i].value === this.state.tip) idVjestine = this.state.Tipovivjestina[i].id;
+            }
+
+            axios.post('http://localhost:8083/skills', {
+                name:this.state.vjestina,
+                skillType: {
+                    id: idVjestine,
+                    name: this.state.tip
+                }
+            })
+
+            var TEMP = [...this.state.vjestine];
+            const temp = {
+                name:this.state.vjestina,
+                skillType: {
+                    id: idVjestine,
+                    name: this.state.tip
+                },
+                obrisati: false
+            }
+            TEMP.push(temp);
+            this.setState({vjestine:TEMP})
+            alert("Vještina uspješno kreirana!")
     }
 
     prikazVjestine() {
-        return this.state.Vjestine.map((vjestinaa, index) => {
-           const {tip,vjestina, obrisati} = vjestinaa
+        return this.state.vjestine.map((vjestinaa, index) => {
+           const {name,skillType} = vjestinaa
+           const obrisati = false
            return (
-              <tr key={vjestina}>
-                 <td>{tip}</td>
-                 <td>{vjestina}</td>
+              <tr key={name}>
+                 <td>{name}</td>
+                 <td>{skillType}</td>
                  <td>{obrisati}
                  <div className="brisanje">
                         <label>
@@ -87,10 +156,13 @@ export class Vjestine extends Component {
             <div className="forma">
                 <div className="form-grupa">
                     <label htmlFor="username">Tip vještine:</label>
-                    <input type="text"
-                    name="tip"
-                    value={this.state.tip} 
-                    onChange={e => this.unosNovog(e)}/>
+                    <Dropdown options={this.state.Tipovivjestina}
+                        value={this.state.temp}
+                        onChange={(e) => {
+                        this.handleChangeTipVjestine(e);
+                        }}
+                        placeholder="Odaberite ponuđeni tip vještine"
+                    />
                 </div>
                 <div className="form-grupa">
                     <label htmlFor="username">Vještina:</label>
