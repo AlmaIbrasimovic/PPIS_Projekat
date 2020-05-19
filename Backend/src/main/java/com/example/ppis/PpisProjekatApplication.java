@@ -30,7 +30,8 @@ public class PpisProjekatApplication {
 									 EducationTypeRepository educationTypeRepository,
 									 EducationRepository educationRepository,
 									 EmployeeRepository employeeRepository,
-									 EmployeeSkillRepository employeeSkillRepository) {
+									 EmployeeSkillRepository employeeSkillRepository,
+									 SuplierRepository suplierRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("korisnik"));
@@ -116,6 +117,18 @@ public class PpisProjekatApplication {
 			log.info("Svi skilovi uposlenika \n");
 			for (EmployeeSkill employeeSkill : employeeSkillRepository.findAll()) {
 				log.info(employeeSkill.getSkill().getName());
+			}
+			log.info(" ");
+
+			//Dobavljaci
+
+			Suplier suplier1 = suplierRepository.save(new Suplier("HP", "Adresa1", "Niko Nikic"));
+			Suplier suplier2 = suplierRepository.save(new Suplier("Import-Eksport", "Adresa 55", "Savo Savic"));
+			Suplier suplier3 = suplierRepository.save(new Suplier("Iron Man Processors", "Adresa 153", "Stipo Stipic"));
+
+			log.info("Dobavljaci \n");
+			for (Suplier suplier : suplierRepository.findAll()) {
+				log.info(suplier.getName());
 			}
 			log.info(" ");
 		};
