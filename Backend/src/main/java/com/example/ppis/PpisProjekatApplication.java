@@ -31,7 +31,8 @@ public class PpisProjekatApplication {
 									 EducationRepository educationRepository,
 									 EmployeeRepository employeeRepository,
 									 EmployeeSkillRepository employeeSkillRepository,
-									 SuplierRepository suplierRepository) {
+									 SuplierRepository suplierRepository,
+									 ContractRepository contractRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("korisnik"));
@@ -129,6 +130,18 @@ public class PpisProjekatApplication {
 			log.info("Dobavljaci \n");
 			for (Suplier suplier : suplierRepository.findAll()) {
 				log.info(suplier.getName());
+			}
+			log.info(" ");
+
+			//Ugovori
+
+			Contract contract1 = contractRepository.save(new Contract(suplier1, "Ugovor o nabavci laptopa", new Date(), new Date()));
+			Contract contract2 = contractRepository.save(new Contract(suplier1, "Ugovor o nabavci slusalica", new Date(), new Date()));
+			Contract contract3 = contractRepository.save(new Contract(suplier3, "Ugovor o nabavci procesora", new Date(), new Date()));
+
+			log.info("Ugovori \n");
+			for (Contract contract : contractRepository.findAll()) {
+				log.info(contract.getName() + " Dobavljac: " + contract.getSuplier().getName());
 			}
 			log.info(" ");
 		};

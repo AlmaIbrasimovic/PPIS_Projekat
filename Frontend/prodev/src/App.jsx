@@ -7,7 +7,9 @@ import { Vjestine } from "./Vjestine/index";
 import { Tipovi } from "./TipoviVjestina/index";
 import { TipoviEdukacija } from "./TipoviEdukacija/index"
 import { Edukacije } from "./Edukacije/index"
-import { Uposlenici }  from "./Uposlenici/index"
+import { Uposlenici } from "./Uposlenici/index"
+import { KnowledgeNavbar } from "./Navigation/index"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 
 // Odkomentirati za login
 /*
@@ -103,15 +105,21 @@ function App() {
   );
 }
 */
- 
+
 
 
 // Za listu vjestina
 function App() {
-  return(
-    <div className="App">
-      <Vjestine/>
-    </div>
+  return (
+    <Router>
+      <div className="App">
+        <KnowledgeNavbar />
+        <Route path="/tipovi-vjestina" component={Tipovi} />
+        <Route path="/vjestine" component={Vjestine} />
+        <Route path="/tipovi-edukacija" component={TipoviEdukacija} />
+        <Route path="/edukacije" component={Edukacije} />
+      </div>
+    </Router>
   );
 }
 
