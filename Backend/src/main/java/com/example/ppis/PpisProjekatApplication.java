@@ -32,7 +32,8 @@ public class PpisProjekatApplication {
 									 EmployeeRepository employeeRepository,
 									 EmployeeSkillRepository employeeSkillRepository,
 									 SuplierRepository suplierRepository,
-									 ContractRepository contractRepository) {
+									 ContractRepository contractRepository,
+									 CriteriaTypeRepository criteriaTypeRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("korisnik"));
@@ -142,6 +143,18 @@ public class PpisProjekatApplication {
 			log.info("Ugovori \n");
 			for (Contract contract : contractRepository.findAll()) {
 				log.info(contract.getName() + " Dobavljac: " + contract.getSuplier().getName());
+			}
+			log.info(" ");
+
+			//Tipovi kriterija za ocjenjivanje
+
+			CriteriaType criteriaType1 = criteriaTypeRepository.save(new CriteriaType("Cijena", 2.));
+			CriteriaType criteriaType2 = criteriaTypeRepository.save(new CriteriaType("Brzina dostave", 2.));
+			CriteriaType criteriaType3 = criteriaTypeRepository.save(new CriteriaType("Komunikacija", 1.));
+
+			log.info("Kriteriji ocjenjivanja \n");
+			for (CriteriaType criteriaType : criteriaTypeRepository.findAll()) {
+				log.info(criteriaType.getName() + " Koeficijent: " + criteriaType.getCoeficient());
 			}
 			log.info(" ");
 		};
