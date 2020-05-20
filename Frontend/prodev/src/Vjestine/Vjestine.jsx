@@ -103,8 +103,8 @@ export class Vjestine extends Component {
     }
 
     prikazVjestine() {
-        return this.state.vjestine.map((vjestinaa, index) => {
-           const {name,skillType} = vjestinaa
+        return this.state.vjestine.map((vjestina, index) => {
+           const {name,skillType} = vjestina
            const obrisati = false
            return (
               <tr key={name}>

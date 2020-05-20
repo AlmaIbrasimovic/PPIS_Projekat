@@ -10,6 +10,7 @@ import { Edukacije } from "./Edukacije/index"
 import { Uposlenici } from "./Uposlenici/index"
 import { KnowledgeNavbar } from "./Navigation/index"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import { DodavanjeVjestine } from "./DodavanjeVjestine/index"
 
 // Odkomentirati za login
 /*
@@ -114,6 +115,7 @@ function App() {
     <Router>
       <div className="App">
         <KnowledgeNavbar />
+        <DodavanjeVjestine />
         <Route path="/tipovi-vjestina" component={Tipovi} />
         <Route path="/vjestine" component={Vjestine} />
         <Route path="/tipovi-edukacija" component={TipoviEdukacija} />
@@ -129,11 +131,11 @@ function App() {
 function App() {
   return(
     <div className="App">
-      <Tipovi/>
+      <DodavanjeVjestine/>
     </div>
   );
-}
-*/
+}*/
+
 /*
 // Za listu tipova edukacija
 
