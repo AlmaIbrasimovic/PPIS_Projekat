@@ -101,6 +101,7 @@ export class Korisnici extends Component {
                    else tempRole += ", " + roleList[i].name
            }
            else tempRole = roleList[0].name;
+           
 
            return (
               <tr key={username}>
