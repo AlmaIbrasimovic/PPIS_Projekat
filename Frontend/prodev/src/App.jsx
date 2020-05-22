@@ -13,7 +13,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { DodavanjeVjestine } from "./DodavanjeVjestine/index"
 
 // Odkomentirati za login
-/*
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -80,7 +80,7 @@ const RightSide = props => {
   );
 };
 
-export default App;*/
+export default App;
 
 
 
@@ -107,7 +107,7 @@ function App() {
 }
 */
 
-
+/*
 
 // Za listu vjestina
 function App() {
@@ -115,15 +115,16 @@ function App() {
     <Router>
       <div className="App">
         <KnowledgeNavbar />
-        <DodavanjeVjestine />
+        
         <Route path="/tipovi-vjestina" component={Tipovi} />
         <Route path="/vjestine" component={Vjestine} />
         <Route path="/tipovi-edukacija" component={TipoviEdukacija} />
         <Route path="/edukacije" component={Edukacije} />
+        <Route path="/korisnici" component={Korisnici} />
       </div>
     </Router>
   );
-}
+}*/
 
 
 /*
@@ -156,4 +157,5 @@ function App() {
     </div>
   );
 }*/
-export default App;
+
+//export default App;

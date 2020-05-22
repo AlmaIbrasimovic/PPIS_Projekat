@@ -1,51 +1,112 @@
 import React, {Component} from 'react'
 import axios from 'axios'
+import Dropdown from 'react-dropdown';
 
 export class Korisnici extends Component {
     constructor(props) {
         super (props)
         this.state = {
-            proba:[],
-            Korisnici : [
-                {prezime: "Čogić", ime: "Lamija", uloga: "Kupac", obrisati: false},
-                {prezime: "Ibrašimović", ime: "Alma", uloga: "Kupac", obrisati: false},
-                {prezime: "Karić", ime: "Zlata", uloga: "Kupac", obrisati: false},
-                {prezime: "Kasum", ime: "Lejla", uloga: "Kupac", obrisati: false},
-                {prezime: "Jureta", ime: "Dolores", uloga: "Kupac", obrisati: false}
+            Korisnici : [],
+            Header : [
+                {Username: "", Email: "",uloga: "", obrisati: false}
             ],
-            ime: '',
-            prezime: '',
-            uloga:''
+            options:[],
+            temp:'',
+            email: '',
+            username: '',
+            uloga:'',
+            password: '',
+            tipUloge:'',
+            id:''
         };
     }
 
     handleChange = (e, index) => {
-        this.state.Korisnici[index].obrisati = true;
+        this.state.id = this.state.Korisnici[index].id;;
+    }
+    
+    componentWillMount() {
+        axios.get('http://localhost:8083/user/all')
+          .then(res => {
+            const Korisnici = res.data;
+            this.setState({ Korisnici });
+        })
+        axios.get('http://localhost:8083/role/all')
+          .then(res => {
+            var temp=[];
+            for (var i=0; i<res.data.length;i++) {
+                temp.push({name: `${res.data[i].name}`, value: res.data[i].name, id: res.data[i].id});
+                
+            }
+            this.setState({ options:temp });
+        })
+
     }
 
     obrisiKorisnika = () => {
-        var TEMP = [...this.state.Korisnici];
-        for (var i = 0; i<TEMP.length; i++) {
-            if(TEMP[i].obrisati) TEMP.splice(i, 1);
-        }
-        this.setState({Korisnici:TEMP})
+        axios.delete(`http://localhost:8083/user/${this.state.id}`)
+            .then(res => {
+                var TEMP = [...this.state.Korisnici];
+                for (var i = 0; i<TEMP.length; i++) {
+                    if(TEMP[i].id === this.state.id) TEMP.splice(i, 1);
+                }
+                this.setState({Korisnici:TEMP})
+                alert("Uspješno obrisan korisnik!");
+        })
     }
 
     kreirajKorisnika = () => {
+        var idUloge =''
+        for (var i = 0; i<this.state.options.length; i++) {
+            if (this.state.options[i].value === this.state.tipUloge) idUloge = this.state.options[i].id;
+        }
+        axios.post('http://localhost:8083/user/register', {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            roleList: [{
+                roleId: idUloge,
+            }]
+        })
+
         var TEMP = [...this.state.Korisnici];
-        const temp = {prezime: this.state.prezime, ime: this.state.ime, uloga: this.state.uloga, obrisati: false}
+        const temp = {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+            roleList: [{
+                roleId: idUloge,
+            }],
+            obrisati: false
+        }
         TEMP.push(temp);
-        this.setState({Korisnici:TEMP})  
+        this.setState({Korisnici:TEMP}) 
+        alert("Korisnik uspješno registrovan!")
+    }
+
+    handleChangeUloga = (selectedOption) => {
+        if (selectedOption) {
+            this.setState({tipUloge: selectedOption.value})
+            this.setState({temp:selectedOption});
+        }
     }
      
     prikazKorisnika() {
         return this.state.Korisnici.map((korisnik, index) => {
-           const {prezime, ime, uloga, obrisati} = korisnik
+           const {email, username, roleList, obrisati} = korisnik
+           var tempRole = ""
+           if (roleList.length > 1) {
+               for (var i = 0; i<roleList.length; i++)
+                   if (i == 0)  tempRole += " " + roleList[i].name
+                   else tempRole += ", " + roleList[i].name
+           }
+           else tempRole = roleList[0].name;
+
            return (
-              <tr key={ime}>
-                 <td>{prezime}</td>
-                 <td>{ime}</td>
-                 <td>{uloga}</td>
+              <tr key={username}>
+                 <td>{username}</td>
+                 <td>{email}</td>
+                 <td>{tempRole}</td>
                  <td>{obrisati}
                  <div className="brisanje">
                         <label>
@@ -62,7 +123,7 @@ export class Korisnici extends Component {
     }
 
     headerTabele() {
-        let header = Object.keys(this.state.Korisnici[0])
+        let header = Object.keys(this.state.Header[0])
         return header.map((key, index) => {
            return <th key={index}>{key.toUpperCase()}</th>
         })
@@ -91,25 +152,35 @@ export class Korisnici extends Component {
             </div>
             <div className="forma">
                 <div className="form-grupa">
-                    <label htmlFor="username">Ime:</label>
+                    <label htmlFor="username">Username:</label>
                     <input type="text"
-                    name="ime"
-                    value={this.state.ime} 
+                    name="username"
+                    value={this.state.username} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
                 <div className="form-grupa">
-                    <label htmlFor="username">Prezime:</label>
+                    <label htmlFor="username">Email:</label>
                     <input type="text"
-                    name="prezime"
-                    value={this.state.prezime} 
+                    name="email"
+                    value={this.state.email} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
                 <div className="form-grupa">
-                    <label htmlFor="username">Uloga:</label>
-                    <input type="text" 
-                    name="uloga"
-                    value={this.state.uloga} 
+                    <label htmlFor="password">Password:</label>
+                    <input type="password"
+                    name="password"
+                    value={this.state.password} 
                     onChange={e => this.unosNovog(e)}/>
+                </div>
+                <div className="form-grupa">
+                    <label htmlFor="uloga">Uloga:</label>
+                    <Dropdown options={this.state.options}      
+                        value={this.state.temp} 
+                        onChange={(e) => {
+                            this.handleChangeUloga(e);
+                        }}
+                        placeholder="Odaberite ponuđeni tip uloge"
+                    />  
                 </div>
                 <button type="button" className="btn"  onClick={this.kreirajKorisnika}>
                     Dodavanje novog korisnika

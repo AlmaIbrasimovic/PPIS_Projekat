@@ -3,7 +3,7 @@ import loginSlika from "../logo.png";
 import { withRouter, Redirect } from 'react-router-dom';
 import {browserHistory} from 'react-router';
 import { TipoviEdukacija } from "../TipoviEdukacija/TipoviEdukacija.jsx"
-
+import axios from 'axios'
 
 export class Login extends React.Component {
     constructor (props) {
@@ -25,8 +25,15 @@ export class Login extends React.Component {
         else if  (this.state.username === '') alert('Molimo unesite vaše korisničko ime!');
         else if (this.state.password === '') alert('Molimo unesite vašu lozinku!');
         else {
-            alert('Sve OK');  
-            return <TipoviEdukacija />;
+            axios.post('http://localhost:8083/user/login', {
+                password: this.state.password,
+                username: this.state.username
+            }).then(res => {
+                alert(res.data.message)
+            })
+            .catch(err => {
+                alert(err.response.data.message)
+            })
         }
     }
 

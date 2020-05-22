@@ -1,5 +1,6 @@
 import React from "react";
 import loginSlika from "../logo.png";
+import axios from 'axios'
 
 export class Register extends React.Component {
     constructor (props) {
@@ -22,7 +23,15 @@ export class Register extends React.Component {
             alert("Molimo unesite sve podatke!")
         }
         else {
-            alert("Sve OK!");
+            axios.post('http://localhost:8083/user/register', {
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password,
+                roleList: [{
+                    roleId: 2,
+                }]
+            })
+            alert("Uspješno ste kreirali račun!")
         }
 
     }
