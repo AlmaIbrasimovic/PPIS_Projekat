@@ -122,6 +122,7 @@ function App() {
         <Route path="/edukacije" component={Edukacije} />
         <Route path="/korisnici" component={Korisnici} />
         <Route path="/certifikati" component={Certifikati} />
+        <Route path="/uposlenici" component={Uposlenici} />
       </div>
     </Router>
   );
