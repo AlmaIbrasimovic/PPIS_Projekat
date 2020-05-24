@@ -9,6 +9,7 @@ import { TipoviEdukacija } from "./TipoviEdukacija/index"
 import { Edukacije } from "./Edukacije/index"
 import { Uposlenici } from "./Uposlenici/index"
 import { KnowledgeNavbar } from "./Navigation/index"
+import { Certifikati } from "./Certifikati/index"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { DodavanjeVjestine } from "./DodavanjeVjestine/index"
 
@@ -120,6 +121,7 @@ function App() {
         <Route path="/tipovi-edukacija" component={TipoviEdukacija} />
         <Route path="/edukacije" component={Edukacije} />
         <Route path="/korisnici" component={Korisnici} />
+        <Route path="/certifikati" component={Certifikati} />
       </div>
     </Router>
   );
