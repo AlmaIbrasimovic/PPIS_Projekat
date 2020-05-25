@@ -29,12 +29,12 @@ public class CertificateController {
     }
 
     @GetMapping("/certificate/all")
-    List<Certificate> getAllCertificates() {
-        return getAllCertificates();
+    List<Certificate> getAllCertificates() throws Exception {
+        return certificateService.getAllCertificates();
     }
 
     @DeleteMapping("/certificate/{id}")
-    void deleteCertificate(@PathVariable Integer id) {
-        deleteCertificate(id);
+    void deleteCertificate(@PathVariable Integer id) throws Exception {
+        certificateService.deleteCertificate(id);
     }
 }

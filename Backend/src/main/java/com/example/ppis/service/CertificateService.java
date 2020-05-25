@@ -15,7 +15,7 @@ public class CertificateService {
     CertificateRepository certificateRepository;
 
     public Certificate addCertificate(Certificate certificate) {
-       return certificateRepository.save(certificate);
+        return certificateRepository.save(certificate);
     }
 
     public Certificate getCertificateById(Integer id) throws  Exception {
@@ -25,8 +25,11 @@ public class CertificateService {
         return certificateRepository.findById(id).get();
     }
 
-    public List<Certificate> getAllCertificates() {
+    public List<Certificate> getAllCertificates() throws Exception {
         List<Certificate> certificates = new ArrayList<>();
+        if(certificateRepository.count() == 0) {
+            throw new Exception("Nema certifikata u bazi");
+        }
         certificateRepository.findAll().forEach(certificates::add);
         return certificates;
     }
