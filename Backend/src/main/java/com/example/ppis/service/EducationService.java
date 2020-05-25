@@ -89,4 +89,8 @@ public class EducationService {
         educationRepository.deleteById(id);
         return new ResponseMessageDTO("Uspjesno obrisana edukacija sa id-em " + id).getHashMap();
     }
+
+    public Education findById(Integer id) throws Exception {
+        return educationRepository.findById(id).orElseThrow(() -> new Exception("Edukacija sa id-em " + id + " ne postoji"));
+    }
 }

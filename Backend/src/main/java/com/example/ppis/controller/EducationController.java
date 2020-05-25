@@ -37,4 +37,9 @@ public class EducationController {
     List<Education> getAll() {
         return educationService.getAll();
     }
+
+    @GetMapping("/educations/{id}")
+    public Education one(@PathVariable Integer id) throws Exception {
+        return educationService.findById(id);
+    }
 }
