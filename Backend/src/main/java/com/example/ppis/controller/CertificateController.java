@@ -33,7 +33,7 @@ public class CertificateController {
         return getAllCertificates();
     }
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/certificate/{id}")
     void deleteCertificate(@PathVariable Integer id) {
         deleteCertificate(id);
     }
