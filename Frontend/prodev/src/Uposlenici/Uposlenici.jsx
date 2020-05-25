@@ -5,7 +5,6 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import "react-datepicker/dist/react-datepicker.css";
 
-
 export class Uposlenici extends Component {
     constructor(props) {
         super (props)
@@ -21,11 +20,13 @@ export class Uposlenici extends Component {
             zaposlenje:'',
             rodjenje:'',
             edukacija:'',
+            podaciOEdukaciji:[],
             startDate: new Date(),
             startDate2: new Date(),
             edukacije:[],
             temp:'',
             id:''
+   
         };
     }
 
@@ -56,7 +57,7 @@ export class Uposlenici extends Component {
       }
 
     handleChange = (e, index) => {
-        this.state.id = this.state.Edukacije[index].id;;
+        this.state.id = this.state.sviUposlenici[index].id;;
     }
 
     handleChangeEdukacije = (selectedOption) => {
@@ -80,40 +81,47 @@ export class Uposlenici extends Component {
     }
 
     kreirajUposlenika = () => {
-        /*
-        var idUposlenika = ''
-        var idVjestine = ''
-        for (var i = 0; i<this.state.options.length; i++) {
-            if (this.state.options[i].value === this.state.vjestina) idVjestine = this.state.options[i].id;
+        var idEdukacije = ''
+        for (var i = 0; i<this.state.edukacije.length; i++) {
+            if (this.state.edukacije[i].value === this.state.edukacija) idEdukacije = this.state.edukacije[i].id;
         }
-        for (var i = 0; i<this.state.uposlenici.length; i++) {
-            if (this.state.uposlenici[i].value === this.state.uposlenik) idUposlenika = this.state.uposlenici[i].id;
-        }
-    
-        
-        axios.post('http://localhost:8083/employees', {
-            firstName: this.state.ime,
-            lastName: this.state.prezime,
-            password: this.state.password,
-            dateOfEmployment: this.state.zaposlenje,
-            birthDate: this.state.rodjenje,
-            educations: [{
-                roleId: idUloge,
-            }]
-        })
 
-        var TEMP = [...this.state.Certifikati];
-        const temp = {
-            name: this.state.ime,
-            dateOfIssue: this.state.izdavanje,
-            expireDate: this.state.istek,
-            employee: this.state.uposlenik,
-            skill: this.state.vjestina,
-            obrisati: false
-        }
-        TEMP.push(temp);
-        this.setState({Certifikati:TEMP}) 
-        alert("Certifikat uspješno registrovan!")*/
+        var tempZaposlenje = this.state.zaposlenje;
+        var tempRodjenje = this.state.rodjenje;
+        axios.get(`http://localhost:8083/educations/${idEdukacije}`)
+        .then(res => {
+            const podaciOEdukaciji = res.data;         
+            this.setState({ podaciOEdukaciji }); 
+
+            axios.post('http://localhost:8083/employees', {
+                firstName: this.state.ime,
+                lastName: this.state.prezime,
+                dateOfEmployment: this.state.zaposlenje,
+                birthDate: this.state.rodjenje,
+                educations: [this.state.podaciOEdukaciji]
+            })    
+
+            /*
+            var TEMP = [...this.state.sviUposlenici];
+            const temp = {
+                firstName: this.state.ime,
+                lastName: this.state.prezime,
+                dateOfEmployment: tempZaposlenje,
+                birthDate: tempRodjenje,
+                educations: [this.state.podaciOEdukaciji],
+                obrisati: false
+            }
+            TEMP.push(temp);
+            this.setState({sviUposlenici:TEMP})   */
+        })
+        
+        alert("Uposlenik uspješno registrovan!")
+    }
+
+    unosNovog = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
 
 
@@ -149,14 +157,17 @@ export class Uposlenici extends Component {
     prikazUposlenika() {
         return this.state.sviUposlenici.map((tipov, index) => {
            const {firstName, lastName, birthDate, dateOfEmployment, educations} = tipov
+           var temaEdukacije = ''
+           //console.log("Dan " + dateOfEmployment)
            const brisati = false
+           if (educations.length != 0) temaEdukacije = (educations[0].topic)
            return (
               <tr key={firstName + " " + lastName}>
                  <td>{firstName}</td>
                  <td>{lastName}</td>
                  <td>{birthDate}</td>
                  <td>{dateOfEmployment}</td>
-                 <td>{educations.topic}</td>
+                 <td>{temaEdukacije}</td>
                  <td>{brisati}
                     <div className="brisanje">
                         <label>
@@ -172,6 +183,14 @@ export class Uposlenici extends Component {
         })
     }
 
+    handleChangeVjestine = (selectedOption) => {
+
+        if (selectedOption) {
+            this.setState({tipVjestine:selectedOption.value});
+            this.setState({temp2:selectedOption});
+        }
+    }
+
     headerTabele() {
         let header = Object.keys(this.state.HeaderTabele[0])
         return header.map((key, index) => {
@@ -180,14 +199,14 @@ export class Uposlenici extends Component {
     }
 
     obrisiUposlenika = () => {
-        axios.delete(`http://localhost:8083/education-types/${this.state.id}`)
+        axios.delete(`http://localhost:8083/employees/${this.state.id}`)
         .then(res => {
             var TEMP = [...this.state.sviUposlenici];
             for (var i = 0; i<TEMP.length; i++) {
                 if(TEMP[i].obrisati) TEMP.splice(i, 1);
             }
-        this.setState({sviUposlenici:TEMP})
-        alert("Uspješno obrisan uposlenik!");
+            this.setState({sviUposlenici:TEMP})
+            alert("Uspješno obrisan uposlenik!");
         })
     }
     
@@ -202,47 +221,53 @@ export class Uposlenici extends Component {
                   {this.prikazUposlenika()}
                </tbody>
             </table>
-            <div className="footer">
+            <div className="footerUposlenici">
                 <button type="button" className="btn"  onClick={this.obrisiUposlenika}>
                     Obriši uposlenika
                 </button>
             </div>
-            <div className="forma">
-                <div className="form-grupa">
+            <div className="formaUposlenici">
+                <div className="form-grupaUposlenici">
                     <label htmlFor="ime">Ime uposlenika:</label>
                     <input type="text"
                     name="ime"
                     value={this.state.ime} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaUposlenici">
                     <label htmlFor="prezime">Prezime uposlenika:</label>
                     <input type="text"
                     name="prezime"
                     value={this.state.prezime} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaUposlenici">
                     <label htmlFor="rodjenje">Datum rođenja:</label>
                     <DatePicker
                         name="rodjenje"
-                        selected={this.state.startDate}
+                        selected={this.state.startDate2}
                         onChange={this.handleChangeDateRodjenja}
                         showTimeSelect
-                        dateFormat="Pp"
+                        timeFormat="HH:mm"
+                        timeCaption="Vrijeme"
+                        timeIntervals={60}
+                        dateFormat="dd/MM/yyyy, h:mm"
                     />
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaUposlenici">
                     <label htmlFor="zaposlenje">Datum zaposlenja:</label>
                     <DatePicker
                         name="zaposlenje"
                         selected={this.state.startDate}
                         onChange={this.handleChangeDateZaposlenja}
                         showTimeSelect
-                        dateFormat="Pp"
+                        timeFormat="HH:mm"
+                        timeCaption="Vrijeme"
+                        timeIntervals={60}
+                        dateFormat="dd/MM/yyyy, h:mm"
                     />
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaUposlenici">
                     <label htmlFor="edukacija">Edukacije:</label>
                     <Dropdown options={this.state.edukacije}      
                         value={this.state.temp} 
@@ -252,22 +277,20 @@ export class Uposlenici extends Component {
                         placeholder="Odaberite ponuđeni tip edukacije"
                     /> 
                 </div>
-                <button type="button" className="btn"  onClick={this.kreirajUposlenika}>
+                <button type="button" className="btnDodaj"  onClick={this.kreirajUposlenika}>
                     Dodavanje novog uposlenika
                 </button>
             </div>
-            <div className="forma">
-                <div className="form-grupa">
-                    <label htmlFor="username">Vještina:</label>
-                    <Dropdown options={this.state.vjestine}      
-                        value={this.state.temp2} 
-                        onChange={(e) => {
-                            this.handleChangeVjestine(e);
-                        }}
-                        placeholder="Odaberite tip vještine za pretraživanje"
-                    />  
-                </div>  
-                <button type="button" className="btn" onClick={this.prikaziUposlenike}>
+            <div className="formaUposleniciVjestine">
+                <label htmlFor="vjestina">Vještina:</label>
+                <Dropdown className="dropdownPretrazi" options={this.state.vjestine}
+                    value={this.state.temp2} 
+                    onChange={(e) => {
+                        this.handleChangeVjestine(e);
+                    }}
+                    placeholder="Odaberite tip vještine za pretraživanje"
+                />  
+                <button type="button" className="btnPretrazi" onClick={this.prikaziUposlenike}>
                     Pretraži uposlenike
                 </button>    
                 <div id="lista"></div>         

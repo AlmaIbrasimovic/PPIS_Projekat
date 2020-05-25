@@ -115,7 +115,7 @@ function App() {
     <Router>
       <div className="App">
         <KnowledgeNavbar />
-        
+
         <Route path="/tipovi-vjestina" component={Tipovi} />
         <Route path="/vjestine" component={Vjestine} />
         <Route path="/tipovi-edukacija" component={TipoviEdukacija} />

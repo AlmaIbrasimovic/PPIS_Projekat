@@ -22,6 +22,7 @@ export class TipoviEdukacija extends Component {
             this.setState({ tipovi });
         })
     }
+    
     handleChange = (e, index) => {
         this.state.id = this.state.tipovi[index].id;;
     }

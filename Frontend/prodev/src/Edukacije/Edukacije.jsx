@@ -166,14 +166,14 @@ export class Edukacije extends Component {
                    <td>{educationType.name}</td>
                    <td>{skill.name}</td> 
                    <td>{brisati}
-                   <div className="brisanje">
-                        <label>
-                            <input type="checkbox"  
-                                brisati={this.state.checked}
-                                onChange={e => this.handleChange(e, index)}/>
-                        </label>
-                    </div>
-               </td>      
+                        <div className="brisanje">
+                            <label>
+                                <input type="checkbox"  
+                                    brisati={this.state.checked}
+                                    onChange={e => this.handleChange(e, index)}/>
+                            </label>
+                        </div>
+                    </td>      
                 </tr>
              ) 
          })
