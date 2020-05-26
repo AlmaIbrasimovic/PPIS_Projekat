@@ -92,7 +92,6 @@ export class Uposlenici extends Component {
         .then(res => {
             const podaciOEdukaciji = res.data;         
             this.setState({ podaciOEdukaciji }); 
-
             axios.post('http://localhost:8083/employees', {
                 firstName: this.state.ime,
                 lastName: this.state.prezime,
@@ -158,7 +157,6 @@ export class Uposlenici extends Component {
         return this.state.sviUposlenici.map((tipov, index) => {
            const {firstName, lastName, birthDate, dateOfEmployment, educations} = tipov
            var temaEdukacije = ''
-           //console.log("Dan " + dateOfEmployment)
            const brisati = false
            if (educations.length != 0) temaEdukacije = (educations[0].topic)
            return (
@@ -184,7 +182,6 @@ export class Uposlenici extends Component {
     }
 
     handleChangeVjestine = (selectedOption) => {
-
         if (selectedOption) {
             this.setState({tipVjestine:selectedOption.value});
             this.setState({temp2:selectedOption});
@@ -210,7 +207,6 @@ export class Uposlenici extends Component {
         })
     }
     
-
     render() {
         return (
             <div>

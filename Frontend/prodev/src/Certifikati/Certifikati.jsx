@@ -13,6 +13,8 @@ export class Certifikati extends Component {
             ],
             options:[],
             uposlenici:[],
+            uposlenikCertifikata:[], // Za dobavljanje korisnika za kojeg je certifikat
+            vjestinaCertifikata:[], // Za dobavljanje vjestine za koju je certfikat
             ime:'',
             izdavanje:'',
             istek:'',
@@ -30,22 +32,32 @@ export class Certifikati extends Component {
     }
     
     componentWillMount() {
+        axios.get('http://localhost:8083/certificate/all')
+          .then(res => {
+            const Certifikati = res.data;
+            this.setState({ Certifikati });
+        })
+
         axios.get('http://localhost:8083/employees')
           .then(res => {
             var temp=[];
+            const uposlenikCertifikata = res.data;
             for (var i=0; i<res.data.length;i++) {
                 temp.push({name: `${res.data[i].firstName}`, value: res.data[i].firstName + " " + res.data[i].lastName, id: res.data[i].id});
                 
             }
+            this.setState({ uposlenikCertifikata });
             this.setState({ uposlenici:temp });
         })
         axios.get('http://localhost:8083/skills')
           .then(res => {
             var temp=[];
+            const vjestinaCertifikata = res.data;
             for (var i=0; i<res.data.length;i++) {
                 temp.push({name: `${res.data[i].name}`, value: res.data[i].name, id: res.data[i].id});
                 
             }
+            this.setState({ vjestinaCertifikata });
             this.setState({ options:temp });
         })
     }
@@ -65,7 +77,7 @@ export class Certifikati extends Component {
     }
 
     obrisiCertifikat = () => {
-        axios.delete(`http://localhost:8083/user/${this.state.id}`)
+        axios.delete(`http://localhost:8083/certificate/${this.state.id}`)
             .then(res => {
                 var TEMP = [...this.state.Certifikati];
                 for (var i = 0; i<TEMP.length; i++) {
@@ -85,24 +97,25 @@ export class Certifikati extends Component {
         for (var i = 0; i<this.state.uposlenici.length; i++) {
             if (this.state.uposlenici[i].value === this.state.uposlenik) idUposlenika = this.state.uposlenici[i].id;
         }
-    
-        /*
-        axios.post('http://localhost:8083/user/register', {
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password,
-            roleList: [{
-                roleId: idUloge,
-            }]
-        })*/
+ 
+        axios.post('http://localhost:8083/certificate', {
+            dateOfIssue: this.state.izdavanje,
+            empolyeeOnCrtificate:this.state.uposlenikCertifikata[idUposlenika-1],
+            expireDate: this.state.istek,
+            name: this.state.ime,
+            skillOnCetrificate:this.state.vjestinaCertifikata[idVjestine-1]
+            
+        }).catch(err => {
+            console.log(err.response.data.message)
+        })
 
         var TEMP = [...this.state.Certifikati];
         const temp = {
-            name: this.state.ime,
             dateOfIssue: this.state.izdavanje,
+            empolyeeOnCrtificate:[this.state.uposlenikCertifikata[idUposlenika-1]],
             expireDate: this.state.istek,
-            employee: this.state.uposlenik,
-            skill: this.state.vjestina,
+            name: this.state.ime,
+            skillOnCetrificate:[this.state.vjestinaCertifikata[idVjestine-1]],
             obrisati: false
         }
         TEMP.push(temp);
@@ -126,14 +139,14 @@ export class Certifikati extends Component {
      
     prikazCertifikata() {
         return this.state.Certifikati.map((korisnik, index) => {
-           const {name, employee, skill, dateOfIssue, expireDate, obrisati} = korisnik
+           const {name, empolyeeOnCrtificate, skillOnCetrificate, dateOfIssue, expireDate, obrisati} = korisnik
            return (
               <tr key={name}>
                  <td>{name}</td>
-                 <td>{skill}</td>
+                 <td>{skillOnCetrificate.name}</td>
                  <td>{dateOfIssue}</td>
                  <td>{expireDate}</td>
-                 <td>{employee}</td>
+                 <td>{empolyeeOnCrtificate.firstName + " " + empolyeeOnCrtificate.lastName}</td>
                  <td>{obrisati}
                  <div className="brisanje">
                         <label>
