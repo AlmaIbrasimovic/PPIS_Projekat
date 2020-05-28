@@ -89,26 +89,27 @@ export class Tipovi extends Component {
         return (
             <div>
             <h2 id='title'>Postojeći tipovi</h2>
-            <table id='tipovi'>
+            <table id='tipVjestine'>
                <tbody>
                   <tr>{this.headerTabele()}</tr>
                   {this.prikazTipova()}
                </tbody>
             </table>
             <div className="footer">
-                <button type="button" className="btn"  onClick={this.obrisiTip}>
+                <button type="button" className="btnObrisiTip"  onClick={this.obrisiTip}>
                     Obriši tip vještine
                 </button>
             </div>
-            <div className="forma">
-                <div className="form-grupa">
+            <div className="formaTipovi">
+            <h2 id='title'>Dodaj tip vještine</h2>
+                <div className="form-grupaTipovi">
                     <label htmlFor="username">Tip vještine:</label>
                     <input type="text"
                     name="tip"
                     value={this.state.tip} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <button type="button" className="btn"  onClick={this.kreirajTip}>
+                <button type="button" className="btnDodajTip"  onClick={this.kreirajTip}>
                     Dodavanje novog tipa vještine
                 </button>
             </div>

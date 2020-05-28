@@ -115,3 +115,28 @@
 #tipovi {
   margin-top: 13%;
 }
+
+#tipovi {
+  text-align: center;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 3px solid #ddd;
+  width: 100%;
+}
+
+#tipovi td, #tipovi th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tipovi tr:nth-child(even){background-color: #f2f2f2;}
+
+#tipovi tr:hover {background-color: #ddd;}
+
+#tipovi th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: rgb(76, 119, 175);
+  color: white;
+}

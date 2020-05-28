@@ -2,8 +2,6 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 
 export class DodavanjeVjestine extends Component {
     constructor(props) {
@@ -112,8 +110,8 @@ export class DodavanjeVjestine extends Component {
             <div>
             <h2 id='title'>Dodavanje vještine</h2>
 
-            <div className="forma">
-                <div className="form-grupa">
+            <div className="formaDodavanje">
+                <div className="form-grupaDodavanje">
                     <label htmlFor="username">Odaberite uposlenika:</label>
                     <Dropdown options={this.state.uposlenici}
                         value={this.state.temp}
@@ -123,7 +121,7 @@ export class DodavanjeVjestine extends Component {
                     placeholder="Odaberite uposlenika"
                     />
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaDodavanje">
                     <label htmlFor="username">Odaberite vještinu:</label>
                     <Dropdown options={this.state.vjestine}
                         value={this.state.temp2}
@@ -133,7 +131,7 @@ export class DodavanjeVjestine extends Component {
                     placeholder="Odaberite ponuđenu vještinu"
                     />
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaDodavanje">
                     <label htmlFor="username">Level:</label>
                     <input type="number"
                         name="level"
@@ -141,7 +139,7 @@ export class DodavanjeVjestine extends Component {
                         onChange={e => this.unosNovog(e)}/>
                 </div>
 
-                <button type="button" className="btn" onClick={this.dodajVjestinu}>
+                <button type="button" className="btnDodaj" onClick={this.dodajVjestinu}>
                     Dodavanje nove vještine uposleniku
                 </button>
             </div>

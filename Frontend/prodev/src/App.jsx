@@ -14,6 +14,8 @@ import { Dobavljaci } from "./Dobavljaci/index"
 import { Ugovori } from "./Ugovori/index"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { DodavanjeVjestine } from "./DodavanjeVjestine/index"
+import {Ocjene} from "./Ocjene/index"
+import {Kriteriji} from "./Kriteriji/index"
 
 // Odkomentirati za login
 /*
@@ -120,6 +122,7 @@ function App() {
 
         <Route path="/tipovi-vjestina" component={Tipovi} />
         <Route path="/vjestine" component={Vjestine} />
+        <Route path="/dodavanje-vjestine" component={DodavanjeVjestine} />
         <Route path="/tipovi-edukacija" component={TipoviEdukacija} />
         <Route path="/edukacije" component={Edukacije} />
         <Route path="/korisnici" component={Korisnici} />
@@ -127,6 +130,8 @@ function App() {
         <Route path="/uposlenici" component={Uposlenici} />
         <Route path="/dobavljaci" component={Dobavljaci} />
         <Route path="/ugovori" component={Ugovori} />
+        <Route path="/ocjene" component={Ocjene} />
+        <Route path="/kriteriji" component={Kriteriji} />
       </div>
     </Router>
   );

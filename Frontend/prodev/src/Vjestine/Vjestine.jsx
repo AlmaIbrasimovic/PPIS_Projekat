@@ -19,15 +19,6 @@ export class Vjestine extends Component {
     }
 
     componentWillMount() {
-            /*
-            axios.get('http://localhost:8083/skills')
-                      .then(res => {
-                        const vjestine = res.data;
-                        this.setState({ vjestine });
-            })
-            */
-
-
 
             axios.get('http://localhost:8083/skills')
                           .then(res => {
@@ -104,12 +95,12 @@ export class Vjestine extends Component {
 
     prikazVjestine() {
         return this.state.vjestine.map((vjestina, index) => {
-           const {name,skillType} = vjestina
+           const {name,skillTypeId,skillTypeName} = vjestina
            const obrisati = false
            return (
               <tr key={name}>
                  <td>{name}</td>
-                 <td>{skillType}</td>
+                 <td>{skillTypeName}</td>
                  <td>{obrisati}
                  <div className="brisanje">
                         <label>
@@ -149,11 +140,12 @@ export class Vjestine extends Component {
                </tbody>
             </table>
             <div className="footer">
-                <button type="button" className="btn"  onClick={this.obrisiVjestinu}>
+                <button type="button" className="btnObrisiVjestinu"  onClick={this.obrisiVjestinu}>
                     Obriši vještinu
                 </button>
             </div>
-            <div className="forma">
+            <div className="formaVjestine">
+            <h2 id='title'>Dodavanje vještine</h2>
                 <div className="form-grupa">
                     <label htmlFor="username">Tip vještine:</label>
                     <Dropdown options={this.state.Tipovivjestina}
@@ -164,14 +156,14 @@ export class Vjestine extends Component {
                         placeholder="Odaberite ponuđeni tip vještine"
                     />
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaVjestine">
                     <label htmlFor="username">Vještina:</label>
                     <input type="text"
                     name="vjestina"
                     value={this.state.vjestina}
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <button type="button" className="btn"  onClick={this.kreirajVjestinu}>
+                <button type="button" className="btnDodajVjestinu"  onClick={this.kreirajVjestinu}>
                     Dodavanje nove vještine
                 </button>
             </div>
