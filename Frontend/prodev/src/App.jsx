@@ -14,8 +14,8 @@ import { Dobavljaci } from "./Dobavljaci/index"
 import { Ugovori } from "./Ugovori/index"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { DodavanjeVjestine } from "./DodavanjeVjestine/index"
-import {Ocjene} from "./Ocjene/index"
-import {Kriteriji} from "./Kriteriji/index"
+import { Ocjene } from "./Ocjene/index"
+import { Kriteriji } from "./Kriteriji/index"
 
 // Odkomentirati za login
 /*
@@ -119,7 +119,7 @@ function App() {
     <Router>
       <div className="App">
         <KnowledgeNavbar />
-
+        <Route path="/" exact component={Login} />
         <Route path="/tipovi-vjestina" component={Tipovi} />
         <Route path="/vjestine" component={Vjestine} />
         <Route path="/dodavanje-vjestine" component={DodavanjeVjestine} />

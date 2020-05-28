@@ -36,8 +36,8 @@ public class PpisProjekatApplication {
 									 CriteriaTypeRepository criteriaTypeRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
-			Role role2 = roleRepository.save(new Role("korisnik"));
-			Role role3 = roleRepository.save(new Role("zaposlenik"));
+			Role role2 = roleRepository.save(new Role("hr_manager"));
+			Role role3 = roleRepository.save(new Role("suplier_manager"));
 			log.info("Sve uloge \n");
 			for (Role role : roleRepository.findAll()) {
 				log.info(role.getName());
@@ -46,10 +46,14 @@ public class PpisProjekatApplication {
 
 			// korisnici
 			List<Role> role = new ArrayList<>();
+			role.add(role1);
+			User k1 = userRepository.save(new User("admin", "$2y$12$d.WC//FFyNCsaGzHJhalAuH6EMbmKaPDHUWxGhiQvoghruwrUUjCm", "ante.antic@gmail.com", role));
+			role = new ArrayList<>();
 			role.add(role2);
-			User k1 = userRepository.save(new User("anteantic", "1234567899876", "ante.antic@gmail.com", role));
+			User k2 = userRepository.save(new User("hrmanager", "$2y$12$d.WC//FFyNCsaGzHJhalAuH6EMbmKaPDHUWxGhiQvoghruwrUUjCm", "amna.amnic@gmail.com", role));
+			role = new ArrayList<>();
 			role.add(role3);
-			User k2 = userRepository.save(new User("amno1amnic", "93832979237937", "amna.amnic@gmail.com", role));
+			User k3 = userRepository.save(new User("supmanager", "$2y$12$d.WC//FFyNCsaGzHJhalAuH6EMbmKaPDHUWxGhiQvoghruwrUUjCm", "stevo.stevic@gmail.com", role));
 
 
 			log.info("Svi korisnici \n");
