@@ -147,33 +147,34 @@ export class Korisnici extends Component {
                </tbody>
             </table>
             <div className="footer">
-                <button type="button" className="btn"  onClick={this.obrisiKorisnika}>
+                <button type="button" className="btnObrisiKorisnika"  onClick={this.obrisiKorisnika}>
                     Obriši korisnika
                 </button>
             </div>
-            <div className="forma">
-                <div className="form-grupa">
+            <div className="formaKorisnici">
+                <h2>Unos korisnika</h2>
+                <div className="form-grupaKorisnici">
                     <label htmlFor="username">Username:</label>
                     <input type="text"
                     name="username"
                     value={this.state.username} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaKorisnici">
                     <label htmlFor="username">Email:</label>
                     <input type="text"
                     name="email"
                     value={this.state.email} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaKorisnici">
                     <label htmlFor="password">Password:</label>
                     <input type="password"
                     name="password"
                     value={this.state.password} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaKorisnici">
                     <label htmlFor="uloga">Uloga:</label>
                     <Dropdown options={this.state.options}      
                         value={this.state.temp} 
@@ -183,7 +184,7 @@ export class Korisnici extends Component {
                         placeholder="Odaberite ponuđeni tip uloge"
                     />  
                 </div>
-                <button type="button" className="btn"  onClick={this.kreirajKorisnika}>
+                <button type="button" className="btnDodajKorisnika"  onClick={this.kreirajKorisnika}>
                     Dodavanje novog korisnika
                 </button>
             </div>

@@ -204,26 +204,27 @@ export class Edukacije extends Component {
             </table>
             
             <div className="footer">
-                <button type="button" className="btn"  onClick={this.obrisiKorisnika}>
+                <button type="button" className="btnObrisiEdukaciju"  onClick={this.obrisiKorisnika}>
                     Obriši edukaciju
                 </button>
             </div>
-            <div className="forma">
-                <div className="form-grupa">
+            <div className="formaEdukacije">
+                <h2>Unos edukacije</h2>
+                <div className="form-grupaEdukacije">
                     <label htmlFor="username">Tema:</label>
                     <input type="text"
                     name="tema"
                     value={this.state.tema} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaEdukacije">
                     <label htmlFor="username">Host:</label>
                     <input type="text"
                     name="host"
                     value={this.state.host} 
                     onChange={e => this.unosNovog(e)}/>
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaEdukacije">
                     <label htmlFor="username">Vrijeme:</label>
                     <DatePicker
                         name="vrijeme"
@@ -233,7 +234,7 @@ export class Edukacije extends Component {
                         dateFormat="Pp"
                     />
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaEdukacije">
                     <label htmlFor="username">Edukacije:</label>
                     <Dropdown options={this.state.options}      
                         value={this.state.temp} 
@@ -243,7 +244,7 @@ export class Edukacije extends Component {
                         placeholder="Odaberite ponuđeni tip edukacije"
                     />  
                 </div>
-                <div className="form-grupa">
+                <div className="form-grupaEdukacije">
                     <label htmlFor="username">Vještina:</label>
                     <Dropdown options={this.state.vjestine}      
                         value={this.state.temp2} 
@@ -253,7 +254,7 @@ export class Edukacije extends Component {
                         placeholder="Odaberite ponuđeni tip vještine"
                     />  
                 </div>
-                <button type="button" className="btn" onClick={this.kreirajKorisnika}>
+                <button type="button" className="btnDodajEdukaciju" onClick={this.kreirajKorisnika}>
                     Dodavanje nove edukacije
                 </button>
                 </div>

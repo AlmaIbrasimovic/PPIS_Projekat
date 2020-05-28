@@ -98,6 +98,10 @@ export class Uposlenici extends Component {
                 dateOfEmployment: this.state.zaposlenje,
                 birthDate: this.state.rodjenje,
                 educations: [this.state.podaciOEdukaciji]
+            }).then(response => {
+                if (response.status === 201 || response.status === 200) alert("Uposlenik uspješno registrovan!")
+              }).catch(err => {
+                alert(err.response.data.errors)
             })    
 
             /*
@@ -113,14 +117,22 @@ export class Uposlenici extends Component {
             TEMP.push(temp);
             this.setState({sviUposlenici:TEMP})   */
         })
-        
-        alert("Uposlenik uspješno registrovan!")
     }
 
     unosNovog = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    // Za button sve
+    prikaziSveUposlenike = () => {
+        axios.get('http://localhost:8083/employees')
+          .then(res => {
+            const sviUposlenici = res.data;
+            this.setState({ sviUposlenici });
+        })
+
     }
 
 
@@ -136,6 +148,8 @@ export class Uposlenici extends Component {
         axios.get(`http://localhost:8083/skills/${this.state.idVjestine}/employees`)
           .then(res => {
             var temp=[];
+            const sviUposlenici = res.data;
+            this.setState({ sviUposlenici });
             for (var i=0; i<res.data.length;i++) {
                 temp.push({ime: `${res.data[i].firstName}`, prezime: res.data[i].lastName, value: res.data[i].name, id: res.data[i].id});               
             }
@@ -146,10 +160,10 @@ export class Uposlenici extends Component {
             })
         })
     
-        return this.state.uposlenici.map((uposlenik) => {
+       /* return this.state.uposlenici.map((uposlenik) => {
             const {key} = uposlenik  
             return(document.getElementById("lista").innerHTML += '<ul>' + key + '</ul>')
-         })
+         })*/
     }
 
     // Za prikaz liste uposlenika
@@ -202,27 +216,46 @@ export class Uposlenici extends Component {
             for (var i = 0; i<TEMP.length; i++) {
                 if(TEMP[i].obrisati) TEMP.splice(i, 1);
             }
-            this.setState({sviUposlenici:TEMP})
             alert("Uspješno obrisan uposlenik!");
-        })
+            this.setState({sviUposlenici:TEMP})
+        }).catch(err => {
+            console.log(err.response.data.errors)
+        }) 
     }
     
     render() {
         return (
             <div>
-            <h2 id='title'>Uposlenici</h2>
-            <table id='tipovi'>
-               <tbody>
-                  <tr>{this.headerTabele()}</tr>
-                  {this.prikazUposlenika()}
-               </tbody>
-            </table>
+                <div className="formaUposleniciVjestine">                       
+                    <Dropdown className="dropdownPretrazi" options={this.state.vjestine}
+                        value={this.state.temp2} 
+                        onChange={(e) => {
+                            this.handleChangeVjestine(e);
+                        }}
+                        placeholder="Odaberite tip vještine za pretraživanje"
+                    />  
+                    <button type="button" className="btnPretrazi" onClick={this.prikaziUposlenike}>
+                        Pretraži uposlenike prema vještini
+                    </button>    
+                    <button type="button" className="btnPretrazi" onClick={this.prikaziSveUposlenike}>
+                        Prikaz svih uposlenika
+                    </button>
+                    <div id="lista"></div>         
+                </div>
+                <h2 id='title'>Uposlenici</h2>
+                <table id='tipovi'>
+                <tbody>
+                    <tr>{this.headerTabele()}</tr>
+                    {this.prikazUposlenika()}
+                </tbody>
+                </table>
             <div className="footerUposlenici">
-                <button type="button" className="btn"  onClick={this.obrisiUposlenika}>
+                <button type="button" className="btnObrisiUposlenika"  onClick={this.obrisiUposlenika}>
                     Obriši uposlenika
                 </button>
             </div>
             <div className="formaUposlenici">
+                <h2>Unos uposlenika</h2>
                 <div className="form-grupaUposlenici">
                     <label htmlFor="ime">Ime uposlenika:</label>
                     <input type="text"
@@ -273,24 +306,10 @@ export class Uposlenici extends Component {
                         placeholder="Odaberite ponuđeni tip edukacije"
                     /> 
                 </div>
-                <button type="button" className="btnDodaj"  onClick={this.kreirajUposlenika}>
+                <button type="button" className="btnDodajUposlenika"  onClick={this.kreirajUposlenika}>
                     Dodavanje novog uposlenika
                 </button>
             </div>
-            <div className="formaUposleniciVjestine">
-                <label htmlFor="vjestina">Vještina:</label>
-                <Dropdown className="dropdownPretrazi" options={this.state.vjestine}
-                    value={this.state.temp2} 
-                    onChange={(e) => {
-                        this.handleChangeVjestine(e);
-                    }}
-                    placeholder="Odaberite tip vještine za pretraživanje"
-                />  
-                <button type="button" className="btnPretrazi" onClick={this.prikaziUposlenike}>
-                    Pretraži uposlenike
-                </button>    
-                <div id="lista"></div>         
-                </div>
             </div>
         )
     }

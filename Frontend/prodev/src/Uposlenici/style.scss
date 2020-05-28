@@ -1,14 +1,18 @@
-.footerUposlenici {
-    .btn {
-        margin-top: 2%;
-    }
-}
+
+
 .formaUposlenici {
-    margin-top: 4%;
+    background-color: #cbd0d696;
+    box-shadow: 0px 0px 18px #555;
+    border: 1px solid black;
+    border-radius: 8px;
+    position: absolute;
+    top: 65%;
+    left: 30%;
+    margin:0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    width: 40%;
 
     .form-grupaUposlenici {
         display: flex;
@@ -34,7 +38,6 @@
             background-color: #ffffff;
             box-shadow: 0px 0px 14px 0.3px #0e81ce96;
           }
-  
           &:focus {
             outline: none;
             box-shadow: 0px 0px 12px 0.8px #3474dbb2;
@@ -43,29 +46,55 @@
     }
 }
 
-.btnDodaj {
-    margin-top: 2%;
-    background-color: rgb(76, 119, 175);
+.btnObrisiUposlenika {
     font-size: 21px;
     padding: 5px 20px;
     border: 0;
+    background-color: #3498db;
     color: #fff;
-    border-radius: 3px;
-    transition: all 250ms ease-in-out;
+    border-radius: 10px;
     cursor: pointer;
+    margin-top: 2%;
+    float: right;
+    margin-right: 0.5%;
+    background-color: rgb(76, 119, 175);
+  }
+
+  .btnObrisiUposlenika:hover {
+      color: white;
+      background-color: #155e8f;
+      border-radius: 10px; 
+  }
+
+  .btnDodajUposlenika {
+      font-size: 21px;
+      padding: 5px 20px;
+      margin-top: 5%;
+      margin-bottom: 4%;
+      background-color: #3498db;
+      color: #fff; 
+      border-radius: 10px;
+      transition: all 250ms ease-in-out;
+      cursor: pointer;      
+      background-color: rgb(76, 119, 175);
+  }
+
+  .btnDodajUposlenika:hover {
+    color: white;
+    background-color: #155e8f;
+    border-radius: 10px; 
 }
 
 .formaUposleniciVjestine {
-    width: fit-content;
+    position: absolute;
+    top: 15%;
     flex-direction: column;
-    width: fit-content;
-    position:absolute;
-    top:43%;
-    left:4%; 
-
+    left: 37.5%;
+    margin:0 auto;
+    display: flex;
     label {
         font-size: 16px;
-        ;
+
     }
     .btnPretrazi {
         margin-top:4%;
@@ -79,8 +108,10 @@
         cursor: pointer;
     }
     .dropdownPretrazi {
-        margin-top:4%;
+      width: 400px;
+      margin-top:4%;
     }
-
-
+}
+#tipovi {
+  margin-top: 13%;
 }

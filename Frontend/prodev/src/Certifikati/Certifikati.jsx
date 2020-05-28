@@ -186,11 +186,12 @@ export class Certifikati extends Component {
                </tbody>
             </table>
             <div className="footer">
-                <button type="button" className="btn"  onClick={this.obrisiCertifikat}>
+                <button type="button" className="btnObrisiCertifikat"  onClick={this.obrisiCertifikat}>
                     Obriši certifikat
                 </button>
             </div>
             <div className="formaCert">
+            <h2>Unos certifikata</h2>
                 <div className="form-grupaCert">
                     <label htmlFor="ime">Ime:</label>
                     <input type="text"
@@ -238,7 +239,7 @@ export class Certifikati extends Component {
                         placeholder="Odaberite vještinu za koju je certifikat"
                     />  
                 </div>
-                <button type="button" className="btn"  onClick={this.kreirajCertifikat}>
+                <button type="button" className="btnDodajCertifikat"  onClick={this.kreirajCertifikat}>
                     Dodavanje novog certifikata
                 </button>
             </div>
