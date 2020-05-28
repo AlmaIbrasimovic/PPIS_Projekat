@@ -11,6 +11,7 @@ import { Uposlenici } from "./Uposlenici/index"
 import { KnowledgeNavbar } from "./Navigation/index"
 import { Certifikati } from "./Certifikati/index"
 import { Dobavljaci } from "./Dobavljaci/index"
+import { Ugovori } from "./Ugovori/index"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { DodavanjeVjestine } from "./DodavanjeVjestine/index"
 
@@ -125,6 +126,7 @@ function App() {
         <Route path="/certifikati" component={Certifikati} />
         <Route path="/uposlenici" component={Uposlenici} />
         <Route path="/dobavljaci" component={Dobavljaci} />
+        <Route path="/ugovori" component={Ugovori} />
       </div>
     </Router>
   );
