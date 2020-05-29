@@ -9,6 +9,9 @@ import { Link } from "react-router-dom"
 
 
 class AdminNavbar extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render() {
         return (
             <nav className="navbar">
@@ -38,7 +41,7 @@ class AdminNavbar extends React.Component {
                         <li>Uposlenici</li>
                     </Link>
                     <Link to="/admin/dobavljaci">
-                        <li>Dobavljaci</li>
+                        <li>Dobavljači</li>
                     </Link>
                     <Link to="/admin/ugovori">
                         <li>Ugovori</li>
@@ -48,7 +51,7 @@ class AdminNavbar extends React.Component {
                     </Link>
                     <Link to="/admin/kriteriji">
                         <li>Kriteriji</li>
-                    </Link>
+                    </Link>  
                 </ul>
             </nav>
         )

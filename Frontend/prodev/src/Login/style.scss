@@ -1,9 +1,13 @@
 .base-container {
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    box-shadow: 0px 0px 18px #555;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: auto;
+    margin-top: 3%;
     .header-register {
       font-size: 22px;
       font-family: "Open Sans", sans-serif;
@@ -11,6 +15,7 @@
 
     .stil {
       font-size: 22px;
+      margin-top: 5%;
       font-family: "Open Sans", sans-serif;
     }
 
@@ -31,6 +36,7 @@
         display: flex;
         flex-direction: column;
         align-items: center; 
+      
         .form-group {
           display: flex;
           flex-direction: column;
@@ -101,10 +107,30 @@
         }
       }
     }
+
+    .btnLogin {
+      font-size: 21px;
+      height: 40px;
+      width: 150px;
+      padding: 5px 20px;
+      border: 0;
+      background-color: #1979b9;
+      color: #fff;
+      border-radius: 6px;
+      transition: all 250ms ease-in-out;
+      cursor: pointer;
+
+    }
+    .btnLogin:hover {
+      background-color: #1c5275;
+      
+
+    }
   
   
     .footer {
       margin-top: 2%;
+      margin-bottom: 5%;
     }
   }
   
