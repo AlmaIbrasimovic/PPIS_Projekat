@@ -1,6 +1,7 @@
 package com.example.ppis.controller;
 
 import com.example.ppis.dto.SkillDTO;
+import com.example.ppis.model.Education;
 import com.example.ppis.model.Employee;
 import com.example.ppis.model.EmployeeSkill;
 import com.example.ppis.model.Skill;
@@ -42,6 +43,11 @@ public class EmployeeController {
     @GetMapping("/employees/{id}/skills")
     List<SkillDTO> getAllSkills(@PathVariable Integer id) throws Exception {
         return employeeService.getSkillsByEmployee(id);
+    }
+
+    @GetMapping("/employees/{id}/educations")
+    List<Education> getAllEducations(@PathVariable Integer id) throws Exception {
+        return employeeService.getEducationsByEmployee(id);
     }
 
     @PostMapping("/employees/{id}/skills")

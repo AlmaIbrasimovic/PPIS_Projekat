@@ -2,10 +2,8 @@ package com.example.ppis.service;
 
 import com.example.ppis.dto.ResponseMessageDTO;
 import com.example.ppis.dto.SkillDTO;
-import com.example.ppis.model.Employee;
-import com.example.ppis.model.EmployeeSkill;
-import com.example.ppis.model.Skill;
-import com.example.ppis.model.SkillType;
+import com.example.ppis.model.*;
+import com.example.ppis.repository.EmployeeEducationRepository;
 import com.example.ppis.repository.EmployeeRepository;
 import com.example.ppis.repository.EmployeeSkillRepository;
 import com.example.ppis.repository.SkillRepository;
@@ -27,6 +25,9 @@ public class EmployeeService {
 
     @Autowired
     SkillRepository skillRepository;
+
+    @Autowired
+    EmployeeEducationRepository employeeEducationRepository;
 
     public List<Employee> getAll() {
         List<Employee> all = new ArrayList<>();
@@ -79,6 +80,21 @@ public class EmployeeService {
         }
 
         return skills;
+    }
+
+
+    public List<Education> getEducationsByEmployee(Integer id) throws Exception {
+        if (!employeeRepository.existsById(id)) {
+            throw new Exception("Uposlenik sa id-em " + id + " ne postoji");
+        }
+
+        List<Education> educations = new ArrayList<>();
+        for(EmployeeEducation employeeEducation : employeeEducationRepository.findAll()) {
+            if(employeeEducation.getEmployee().getId()==id) {
+                educations.add(employeeEducation.getEducation());
+            }
+        }
+        return educations;
     }
 
     public EmployeeSkill addSkillToEmployee(SkillDTO skillDTO, Integer employeeId) throws Exception {

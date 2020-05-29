@@ -33,7 +33,8 @@ public class PpisProjekatApplication {
 									 EmployeeSkillRepository employeeSkillRepository,
 									 SuplierRepository suplierRepository,
 									 ContractRepository contractRepository,
-									 CriteriaTypeRepository criteriaTypeRepository) {
+									 CriteriaTypeRepository criteriaTypeRepository,
+									 CertificateRepository certificateRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("hr_manager"));
@@ -161,6 +162,10 @@ public class PpisProjekatApplication {
 				log.info(criteriaType.getName() + " Koeficijent: " + criteriaType.getCoeficient());
 			}
 			log.info(" ");
+
+			//Svi certifikati
+
+			Certificate certificate1 = certificateRepository.save(new Certificate(employee1, skill3, "CISCO", new Date(), new Date()));
 		};
 	}
 
