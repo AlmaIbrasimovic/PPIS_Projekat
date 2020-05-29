@@ -31,6 +31,9 @@ export class KnowledgeNavbar extends Component {
                     <Link to="/knowledge/edukacije">
                         <li>Edukacije</li>
                     </Link>
+                    <Link to="/knowledge/dodavanje-edukacije">
+                        <li>Dodavanje Edukacije</li>
+                    </Link>
                     <Link to="/knowledge/certifikati">
                         <li>Certifikati</li>
                     </Link>

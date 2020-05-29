@@ -11,6 +11,7 @@ import { KnowledgeNavbar } from "../Navigation/index"
 import { Certifikati } from "../Certifikati/index"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { DodavanjeVjestine } from "../DodavanjeVjestine/index"
+import DodavanjeEdukacije from '../DodavanjeEdukacije/DodavanjeEdukacije'
 
 class Knowledge extends React.Component {
     render() {
@@ -23,6 +24,7 @@ class Knowledge extends React.Component {
                     <Route path="/knowledge/dodavanje-vjestine" component={DodavanjeVjestine} />
                     <Route path="/knowledge/tipovi-edukacija" component={TipoviEdukacija} />
                     <Route path="/knowledge/edukacije" component={Edukacije} />
+                    <Route path="/knowledge/dodavanje-edukacije" component={DodavanjeEdukacije} />
                     <Route path="/knowledge/certifikati" component={Certifikati} />
                     <Route path="/knowledge/uposlenici" component={Uposlenici} />
                 </div>
