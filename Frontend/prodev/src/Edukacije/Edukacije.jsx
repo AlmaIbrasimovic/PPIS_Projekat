@@ -196,6 +196,7 @@ export class Edukacije extends Component {
         return (
             <div>
             <h2 id='title'>Edukacije</h2>
+            <div className="glavniDIV">
             <table id='korisnici'>
                <tbody>
                   <tr>{this.headerTabele()}</tr>
@@ -207,6 +208,8 @@ export class Edukacije extends Component {
                 <button type="button" className="btnObrisiEdukaciju"  onClick={this.obrisiKorisnika}>
                     Obriši edukaciju
                 </button>
+            </div>
+
             </div>
             <div className="formaEdukacije">
                 <h2>Unos edukacije</h2>

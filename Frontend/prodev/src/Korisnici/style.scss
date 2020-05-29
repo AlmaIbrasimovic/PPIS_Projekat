@@ -4,13 +4,19 @@
   }
   
   #korisnici {
+    table-layout: fixed;
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     border: 3px solid #ddd;
     width: 100%;
+    
   }
   
+  .glavniDIV {
+    margin-bottom: 5%;
+  }
+
   #korisnici td, #korisnici th {
     border: 1px solid #ddd;
     padding: 8px;
@@ -72,7 +78,7 @@
     border: 1px solid black;
     border-radius: 8px;
     position: absolute;
-    top: 46%;
+   // top: 46%;
     left: 30%;
     margin:0 auto;
     display: flex;

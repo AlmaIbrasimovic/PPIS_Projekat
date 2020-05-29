@@ -179,6 +179,7 @@ export class Certifikati extends Component {
         return (
             <div>
                 <h2 id='title'>Postojeći certifikati</h2>
+                <div className="glavniDIV">
                 <table id='certifikati'>
                     <tbody>
                         <tr>{this.headerTabele()}</tr>
@@ -189,6 +190,7 @@ export class Certifikati extends Component {
                     <button type="button" className="btnObrisiCertifikat" onClick={this.obrisiCertifikat}>
                         Obriši certifikat
                 </button>
+                </div>
                 </div>
                 <div className="formaCert">
                     <h2>Unos certifikata</h2>

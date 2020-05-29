@@ -354,16 +354,18 @@ export class Uposlenici extends Component {
                     <div id="lista"></div>
                 </div>
                 <h2 id='title'>Uposlenici</h2>
-                <table id='tipovi'>
-                    <tbody>
-                        <tr>{this.headerTabele()}</tr>
-                        {this.prikazUposlenika()}
-                    </tbody>
-                </table>
-                <div className="footerUposlenici">
-                    <button type="button" className="btnObrisiUposlenika" onClick={this.obrisiUposlenika}>
-                        Obriši uposlenika
-                </button>
+                <div className="glavniDIV">
+                    <table id='tipovi'>
+                        <tbody>
+                            <tr>{this.headerTabele()}</tr>
+                            {this.prikazUposlenika()}
+                        </tbody>
+                    </table>
+                    <div className="footerUposlenici">
+                        <button type="button" className="btnObrisiUposlenika" onClick={this.obrisiUposlenika}>
+                            Obriši uposlenika
+                    </button>
+                    </div>
                 </div>
                 <div className="formaUposlenici">
                     <h2>Unos uposlenika</h2>
@@ -440,7 +442,7 @@ export class Uposlenici extends Component {
                         </tbody>
                     </table>
                 </Modal>
-            </div>
+            </div >
         )
     }
 }

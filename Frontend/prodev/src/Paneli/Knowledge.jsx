@@ -12,6 +12,7 @@ import { Certifikati } from "../Certifikati/index"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { DodavanjeVjestine } from "../DodavanjeVjestine/index"
 import DodavanjeEdukacije from '../DodavanjeEdukacije/DodavanjeEdukacije'
+import './style.scss';
 
 class Knowledge extends React.Component {
     render() {
@@ -27,7 +28,9 @@ class Knowledge extends React.Component {
                     <Route path="/knowledge/dodavanje-edukacije" component={DodavanjeEdukacije} />
                     <Route path="/knowledge/certifikati" component={Certifikati} />
                     <Route path="/knowledge/uposlenici" component={Uposlenici} />
+                    <Route path="/" exact component={Login} />
                 </div>
+                <a href="/" className="odjavaLink">Odjava</a>
             </Router>
         )
     }

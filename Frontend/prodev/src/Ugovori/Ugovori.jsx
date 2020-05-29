@@ -156,6 +156,7 @@ export class Ugovori extends Component {
         return (    
             <div>
             <h2 id='title'>Postojeći ugovori</h2>
+            <div className="glavniDIV">
             <table id='korisnici'>
                <tbody>
                   <tr>{this.headerTabele()}</tr>
@@ -166,6 +167,7 @@ export class Ugovori extends Component {
                 <button type="submit" className="btnObrisiUgovor" onClick={this.obrisiUgovor}>
                     Obriši ugovor
                 </button>
+            </div>
             </div>
             <form>
             <div className="formaUgovori">

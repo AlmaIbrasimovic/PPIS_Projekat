@@ -17,7 +17,7 @@ class SuplierNavbar extends React.Component {
             <nav className="navbar">
                 <ul>
                     <Link to="/suplier/dobavljaci">
-                        <li>Dobavljaci</li>
+                        <li>Dobavljači</li>
                     </Link>
                     <Link to="/suplier/ugovori">
                         <li>Ugovori</li>

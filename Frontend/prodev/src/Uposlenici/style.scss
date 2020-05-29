@@ -6,7 +6,7 @@
     border: 1px solid black;
     border-radius: 8px;
     position: absolute;
-    top: 65%;
+  
     left: 30%;
     margin:0 auto;
     display: flex;
@@ -113,6 +113,7 @@
     }
 }
 #tipovi {
+  table-layout: fixed;
   margin-top: 13%;
 }
 

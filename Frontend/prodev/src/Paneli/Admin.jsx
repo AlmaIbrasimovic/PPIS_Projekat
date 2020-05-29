@@ -17,6 +17,7 @@ import { DodavanjeVjestine } from "../DodavanjeVjestine/index"
 import { Ocjene } from "../Ocjene/index"
 import { Kriteriji } from "../Kriteriji/index"
 import DropNav from '../Navigation/DropdownNavbar'
+import './style.scss'; 
 
 class Admin extends React.Component {
     render() {
@@ -36,7 +37,9 @@ class Admin extends React.Component {
                     <Route path="/admin/ugovori" component={Ugovori} />
                     <Route path="/admin/ocjene" component={Ocjene} />
                     <Route path="/admin/kriteriji" component={Kriteriji} />
+                    <Route path="/" exact component={Login} />
                 </div>
+                <a href="/" className = "odjavaLink">Odjava</a>
             </Router>
         )
     }

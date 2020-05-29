@@ -48,7 +48,7 @@ export class Login extends React.Component {
 
     render() {
         return (<div className="base-container" ref={this.props.containerRef}>
-            <div className="stil">Prijavi se na račun</div>
+            <div className="stil">Prijava na račun</div>
             <div className="content">
                 <div className="image">
                     <img src={loginSlika} />
@@ -71,7 +71,7 @@ export class Login extends React.Component {
                 </div>
             </div>
             <div className="footer">
-                <button type="button" className="btn" onClick={this.login}>
+                <button type="button" className="btnLogin" onClick={this.login}>
                     Login
                 </button>
             </div>

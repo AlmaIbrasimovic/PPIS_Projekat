@@ -58,7 +58,12 @@ export class Korisnici extends Component {
     kreirajKorisnika = () => {
         var idUloge =''
         for (var i = 0; i<this.state.options.length; i++) {
-            if (this.state.options[i].value === this.state.tipUloge) idUloge = this.state.options[i].id;
+            console.log(this.state.options[i])
+            console.log("Odabrani " + this.state.tipUloge)
+            if (this.state.options[i].value === this.state.tipUloge) {
+                idUloge = this.state.options[i].id;
+                break;
+            }
         }
         axios.post('http://localhost:8083/user/register', {
             username: this.state.username,
@@ -67,6 +72,10 @@ export class Korisnici extends Component {
             roleList: [{
                 roleId: idUloge,
             }]
+        }).then(response => {
+            if (response.status === 201 || response.status === 200) alert("Korisnik uspješno registrovan!")
+        }).catch(err => {
+            alert(err.response.data.errors)
         })
 
         var TEMP = [...this.state.Korisnici];
@@ -81,7 +90,6 @@ export class Korisnici extends Component {
         }
         TEMP.push(temp);
         this.setState({Korisnici:TEMP}) 
-        alert("Korisnik uspješno registrovan!")
     }
 
     handleChangeUloga = (selectedOption) => {
@@ -91,23 +99,14 @@ export class Korisnici extends Component {
         }
     }
      
-    prikazKorisnika() {
+    prikazKorisnika() {      
         return this.state.Korisnici.map((korisnik, index) => {
            const {email, username, roleList, obrisati} = korisnik
-           var tempRole = ""
-           if (roleList.length > 1) {
-               for (var i = 0; i<roleList.length; i++)
-                   if (i == 0)  tempRole += " " + roleList[i].name
-                   else tempRole += ", " + roleList[i].name
-           }
-           else tempRole = roleList[0].name;
-           
-
            return (
               <tr key={username}>
                  <td>{username}</td>
                  <td>{email}</td>
-                 <td>{tempRole}</td>
+                 <td>{roleList[0].name}</td>
                  <td>{obrisati}
                  <div className="brisanje">
                         <label>
@@ -140,17 +139,20 @@ export class Korisnici extends Component {
         return (
             <div>
             <h2 id='title'>Postojeći korisnici</h2>
-            <table id='korisnici'>
-               <tbody>
-                  <tr>{this.headerTabele()}</tr>
-                  {this.prikazKorisnika()}
-               </tbody>
-            </table>
-            <div className="footer">
-                <button type="button" className="btnObrisiKorisnika"  onClick={this.obrisiKorisnika}>
-                    Obriši korisnika
-                </button>
+            <div className ="glavniDIV">
+                <table id='korisnici'>
+                <tbody>
+                    <tr>{this.headerTabele()}</tr>
+                    {this.prikazKorisnika()}
+                </tbody>
+                </table>
+                <div className="footer">
+                    <button type="submit" className="btnObrisiKorisnika"  onClick={this.obrisiKorisnika}>
+                        Obriši korisnika
+                    </button>
+                </div>
             </div>
+            <form>
             <div className="formaKorisnici">
                 <h2>Unos korisnika</h2>
                 <div className="form-grupaKorisnici">
@@ -184,10 +186,11 @@ export class Korisnici extends Component {
                         placeholder="Odaberite ponuđeni tip uloge"
                     />  
                 </div>
-                <button type="button" className="btnDodajKorisnika"  onClick={this.kreirajKorisnika}>
+                <button type="submit" className="btnDodajKorisnika"  onClick={this.kreirajKorisnika}>
                     Dodavanje novog korisnika
                 </button>
             </div>
+            </form>
             </div>
         )
     }

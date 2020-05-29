@@ -107,6 +107,7 @@ export class Dobavljaci extends Component {
         return (    
             <div>
             <h2 id='title'>Postojeći dobavljači</h2>
+            <div className="glavniDIV">
             <table id='korisnici'>
                <tbody>
                   <tr>{this.headerTabele()}</tr>
@@ -117,6 +118,7 @@ export class Dobavljaci extends Component {
                 <button type="submit" className="btnObrisiDobavljaca" onClick={this.obrisiDobavljaca}>
                     Obriši dobavljača
                 </button>
+            </div>
             </div>
             <form>
             <div className="formaDobavljaci">
