@@ -89,6 +89,7 @@ export class TipoviEdukacija extends Component {
         return (
             <div>
             <h2 id='title'>Postojeći tipovi edukacija</h2>
+            <div className="glavniDIV">
             <table id='tipoviEdu'>
                <tbody>
                   <tr>{this.headerTabele()}</tr>
@@ -99,6 +100,8 @@ export class TipoviEdukacija extends Component {
                 <button type="button" className="btnObrisiEdukaciju"  onClick={this.obrisiTip}>
                     Obriši tip edukacije
                 </button>
+            </div>
+
             </div>
             <div className="formaTipoviEdukacije">
             <h2 id='title'>Dodavanje novog tipa edukacije</h2>

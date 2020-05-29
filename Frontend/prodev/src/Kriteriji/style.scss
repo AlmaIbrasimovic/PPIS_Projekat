@@ -10,11 +10,12 @@
     border: 3px solid #ddd;
     width: 100%;
   }
-  
+
   #kriterij td, #kriterij th {
     border: 1px solid #ddd;
     padding: 8px;
   }
+
   
   #kriterij tr:nth-child(even){background-color: #f2f2f2;}
   
@@ -26,6 +27,9 @@
     text-align: center;
     background-color: rgb(76, 119, 175);
     color: white;
+  }
+  #ocjene {
+    table-layout: fixed;
   }
   
   .btnObrisiKriterij {
@@ -75,7 +79,6 @@
     border: 1px solid black;
     border-radius: 8px;
     position: absolute;
-    top: 46%;
     left: 30%;
     margin:0 auto;
     display: flex;

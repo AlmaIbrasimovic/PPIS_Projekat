@@ -112,18 +112,21 @@ export class Kriteriji extends Component {
     render() {
         return (
             <div>
-                <h2 id='title'>Postojeći kriteriji</h2>
-                <table id='ocjene'>
-                    <tbody>
-                        <tr>{this.headerTabele()}</tr>
-                        {this.prikazKriterija()}
-                    </tbody>
-                </table>
-                <div className="footer">
-                    <button type="button" className="btnObrisiKriterij" onClick={this.obrisiKriterij}>
-                        Obriši kriterij
+            <h2 id='title'>Postojeći kriteriji</h2>
+            <div className="glavniDIV">
+            <table id='ocjene'>
+                <tbody>
+                <tr>{this.headerTabele()}</tr>
+                {this.prikazKriterija()}
+                </tbody>
+            </table>
+            <div className="footer">
+                <button type="button" className="btnObrisiKriterij" onClick={this.obrisiKriterij}>
+                    Obriši kriterij
                 </button>
-                </div>
+            </div>
+            </div>
+
                 <div className="formaKriterij">
                     <h2 id='title'>Dodavanje kriterija</h2>
                     <div className="form-grupaKriterij">

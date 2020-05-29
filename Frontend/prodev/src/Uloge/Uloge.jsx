@@ -70,6 +70,7 @@ export class Uloge extends Component {
         return (
             <div>
             <h2 id='title'>Postojeće uloge</h2>
+            <div className="glavniDIV">
             <table id='uloge'>
                <tbody>
                   <tr>{this.headerTabele()}</tr>
@@ -80,6 +81,7 @@ export class Uloge extends Component {
                 <button type="button" className="btn"  onClick={this.obrisiUlogu}>
                     Obriši ulogu
                 </button>
+            </div>
             </div>
             <div className="forma">
                 <div className="form-grupa">

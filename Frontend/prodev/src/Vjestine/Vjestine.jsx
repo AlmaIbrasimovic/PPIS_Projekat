@@ -133,6 +133,7 @@ export class Vjestine extends Component {
         return (
             <div>
                 <h2 id='title'>Postojeće vještine</h2>
+                <div className="glavniDIV">
                 <table id='vjestine'>
                     <tbody>
                         <tr>{this.headerTabele()}</tr>
@@ -143,6 +144,8 @@ export class Vjestine extends Component {
                     <button type="button" className="btnObrisiVjestinu" onClick={this.obrisiVjestinu}>
                         Obriši vještinu
                 </button>
+                </div>
+
                 </div>
                 <div className="formaVjestine">
                     <h2 id='title'>Dodavanje vještine</h2>

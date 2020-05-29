@@ -221,6 +221,7 @@ export class Ocjene extends Component {
         return (
             <div>
             <h2 id='title'>Postojeće ocjene</h2>
+            <div className="glavniDIV">
             <table id='ocjene'>
                <tbody>
                   <tr>{this.headerTabele()}</tr>
@@ -231,6 +232,7 @@ export class Ocjene extends Component {
                 <button type="button" className="btnObrisiOcjenu"  onClick={this.obrisiOcjenu}>
                     Obriši ocjenu
                 </button>
+            </div>
             </div>
             <div className="formaOcjene">
             <h2 id='title'>Dodavanje ocjene</h2>
