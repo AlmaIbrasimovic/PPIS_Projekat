@@ -8,9 +8,7 @@ import { Link } from "react-router-dom"
 
 
 
-export class KnowledgeNavbar extends Component {
-
-
+class DropNav extends Component {
 
     render() {
         return (
@@ -41,3 +39,5 @@ export class KnowledgeNavbar extends Component {
         )
     }
 }
+
+export default DropNav

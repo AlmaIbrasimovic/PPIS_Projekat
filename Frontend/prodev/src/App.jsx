@@ -1,21 +1,25 @@
 import React from "react";
 import "./App.scss";
 import { Login, Register } from "./Login/index";
-import { Korisnici, Tabela } from "./Korisnici/index";
-import { Uloge } from "./Uloge/index";
-import { Vjestine } from "./Vjestine/index";
-import { Tipovi } from "./TipoviVjestina/index";
-import { TipoviEdukacija } from "./TipoviEdukacija/index"
-import { Edukacije } from "./Edukacije/index"
-import { Uposlenici } from "./Uposlenici/index"
-import { KnowledgeNavbar } from "./Navigation/index"
-import { Certifikati } from "./Certifikati/index"
-import { Dobavljaci } from "./Dobavljaci/index"
-import { Ugovori } from "./Ugovori/index"
+import Admin from './Paneli/Admin'
+import Knowledge from './Paneli/Knowledge'
+import Suplier from './Paneli/Suplier'
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import { DodavanjeVjestine } from "./DodavanjeVjestine/index"
-import { Ocjene } from "./Ocjene/index"
-import { Kriteriji } from "./Kriteriji/index"
+
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Route path="/" exact component={Login} />
+        <Route path="/admin" component={Admin} />
+        <Route path="/knowledge" component={Knowledge} />
+        <Route path="/suplier" component={Suplier} />
+      </div>
+    </Router>
+  );
+}
 
 // Odkomentirati za login
 /*
@@ -112,30 +116,6 @@ function App() {
 */
 
 
-
-// Za listu vjestina
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <KnowledgeNavbar />
-        <Route path="/" exact component={Login} />
-        <Route path="/tipovi-vjestina" component={Tipovi} />
-        <Route path="/vjestine" component={Vjestine} />
-        <Route path="/dodavanje-vjestine" component={DodavanjeVjestine} />
-        <Route path="/tipovi-edukacija" component={TipoviEdukacija} />
-        <Route path="/edukacije" component={Edukacije} />
-        <Route path="/korisnici" component={Korisnici} />
-        <Route path="/certifikati" component={Certifikati} />
-        <Route path="/uposlenici" component={Uposlenici} />
-        <Route path="/dobavljaci" component={Dobavljaci} />
-        <Route path="/ugovori" component={Ugovori} />
-        <Route path="/ocjene" component={Ocjene} />
-        <Route path="/kriteriji" component={Kriteriji} />
-      </div>
-    </Router>
-  );
-}
 
 
 /*
