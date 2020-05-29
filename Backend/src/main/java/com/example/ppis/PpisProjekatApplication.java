@@ -34,7 +34,8 @@ public class PpisProjekatApplication {
 									 SuplierRepository suplierRepository,
 									 ContractRepository contractRepository,
 									 CriteriaTypeRepository criteriaTypeRepository,
-									 CertificateRepository certificateRepository) {
+									 CertificateRepository certificateRepository,
+									 GradeRepository gradeRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("hr_manager"));
@@ -162,6 +163,31 @@ public class PpisProjekatApplication {
 				log.info(criteriaType.getName() + " Koeficijent: " + criteriaType.getCoeficient());
 			}
 			log.info(" ");
+
+			//Ocjene
+			Grade grade11 = gradeRepository.save(new Grade(criteriaType1, suplier1, k3, new Date(), 5, 2018));
+			Grade grade12 = gradeRepository.save(new Grade(criteriaType2, suplier1, k3, new Date(), 2, 2018));
+			Grade grade13 = gradeRepository.save(new Grade(criteriaType3, suplier1, k3, new Date(), 5, 2018));
+
+			Grade grade21 = gradeRepository.save(new Grade(criteriaType1, suplier2, k3, new Date(), 4, 2018));
+			Grade grade22 = gradeRepository.save(new Grade(criteriaType2, suplier2, k3, new Date(), 4, 2018));
+			Grade grade23 = gradeRepository.save(new Grade(criteriaType3, suplier2, k3, new Date(), 2, 2018));
+
+			Grade grade31 = gradeRepository.save(new Grade(criteriaType1, suplier3, k3, new Date(), 2, 2018));
+			Grade grade32 = gradeRepository.save(new Grade(criteriaType2, suplier3, k3, new Date(), 5, 2018));
+			Grade grade33 = gradeRepository.save(new Grade(criteriaType3, suplier3, k3, new Date(), 3, 2018));
+
+			Grade grade119 = gradeRepository.save(new Grade(criteriaType1, suplier1, k3, new Date(), 5, 2019));
+			Grade grade129 = gradeRepository.save(new Grade(criteriaType2, suplier1, k3, new Date(), 3, 2019));
+			Grade grade139 = gradeRepository.save(new Grade(criteriaType3, suplier1, k3, new Date(), 5, 2019));
+
+			Grade grade219 = gradeRepository.save(new Grade(criteriaType1, suplier2, k3, new Date(), 5, 2019));
+			Grade grade229 = gradeRepository.save(new Grade(criteriaType2, suplier2, k3, new Date(), 5, 2019));
+			Grade grade239 = gradeRepository.save(new Grade(criteriaType3, suplier2, k3, new Date(), 2, 2019));
+
+			Grade grade319 = gradeRepository.save(new Grade(criteriaType1, suplier3, k3, new Date(), 2, 2019));
+			Grade grade329 = gradeRepository.save(new Grade(criteriaType2, suplier3, k3, new Date(), 3, 2019));
+			Grade grade339 = gradeRepository.save(new Grade(criteriaType3, suplier3, k3, new Date(), 3, 2019));
 
 			//Svi certifikati
 

@@ -1,19 +1,28 @@
 package com.example.ppis.service;
 
+import com.example.ppis.dto.SuplierGradeDto;
+import com.example.ppis.dto.SuplierGradeObjectDto;
 import com.example.ppis.model.Certificate;
 import com.example.ppis.model.Grade;
+import com.example.ppis.model.Suplier;
 import com.example.ppis.repository.GradeRepository;
+import com.example.ppis.repository.SuplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class GradeService {
 
     @Autowired
     GradeRepository gradeRepository;
+
+    @Autowired
+    SuplierRepository suplierRepository;
 
     public Grade add(Grade grade)  {
         return gradeRepository.save(grade);
@@ -37,6 +46,47 @@ public class GradeService {
             }
         }
         return gradesForSuplier;
+    }
+
+    public SuplierGradeObjectDto getStatistic() throws Exception {
+        List<Grade> all = getAllGrades();
+
+        List<Integer> yearsAll = new ArrayList<>();
+        List<Integer> supliersAll = new ArrayList<>();
+        for(int i=0; i<all.size(); i++) {
+            yearsAll.add(all.get(i).getYear());
+            supliersAll.add(all.get(i).getSuplier().getId());
+        }
+
+        Set<Integer> yearsSet = new HashSet<Integer>(yearsAll);
+        Set<Integer> supliersSet = new HashSet<Integer>(supliersAll);
+
+        List<Integer> years = new ArrayList<>(yearsSet);
+        List<Integer> supliers = new ArrayList<>(supliersSet);
+
+        List<SuplierGradeDto> suplierGradeDtos = new ArrayList<>();
+
+        for(int i=0; i<supliers.size(); i++) {
+            for(int j=0; j<years.size(); j++) {
+                List<Grade> ocjene = new ArrayList<>();
+                Double finalna = 0.;
+                for(int k=0; k<all.size(); k++) {
+                    Integer pom1 = all.get(k).getYear();
+                    Integer pom2 = years.get(j);
+                    Integer pom3 = all.get(k).getSuplier().getId();
+                    Integer pom4 = supliers.get(i);
+                    if(all.get(k).getYear().intValue()==years.get(j).intValue() && all.get(k).getSuplier().getId().intValue() == supliers.get(i).intValue()) {
+                        ocjene.add(all.get(k));
+                        finalna+=all.get(k).getGrade()*all.get(k).getCriteriaType().getCoeficient();
+                    }
+                }
+                Suplier supName = suplierRepository.findById(supliers.get(i)).orElse(null);
+                suplierGradeDtos.add(new SuplierGradeDto(supliers.get(i), supName.getName(), ocjene, finalna, years.get(j)));
+            }
+        }
+
+
+        return new SuplierGradeObjectDto(suplierGradeDtos, supliers, years);
     }
 
     public List<Grade> getAllGradesFromUser(Integer userId) throws Exception {

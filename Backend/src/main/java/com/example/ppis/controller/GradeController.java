@@ -1,5 +1,7 @@
 package com.example.ppis.controller;
 
+import com.example.ppis.dto.SuplierGradeDto;
+import com.example.ppis.dto.SuplierGradeObjectDto;
 import com.example.ppis.model.Grade;
 import com.example.ppis.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +50,10 @@ public class GradeController {
     @GetMapping("/grade/final/{suplierId}")
     Float getFinalGradeForSuplier(@PathVariable Integer suplierId) throws Exception{
         return gradeService.getFinalGradeForSuplier(suplierId);
+    }
+
+    @GetMapping("grades/statistic")
+    SuplierGradeObjectDto getStatistic() throws Exception {
+        return gradeService.getStatistic();
     }
 }
