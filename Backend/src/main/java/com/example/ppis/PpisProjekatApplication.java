@@ -35,7 +35,8 @@ public class PpisProjekatApplication {
 									 ContractRepository contractRepository,
 									 CriteriaTypeRepository criteriaTypeRepository,
 									 CertificateRepository certificateRepository,
-									 GradeRepository gradeRepository) {
+									 GradeRepository gradeRepository,
+									 EmployeeEducationRepository employeeEducationRepository) {
 		return(args) -> {
 			Role role1 = roleRepository.save(new Role("administrator"));
 			Role role2 = roleRepository.save(new Role("hr_manager"));
@@ -80,6 +81,12 @@ public class PpisProjekatApplication {
 			Skill skill1 = skillRepository.save(new Skill("Java programiranje", skillType1));
 			Skill skill2 = skillRepository.save(new Skill("React programiranje", skillType1));
 			Skill skill3 = skillRepository.save(new Skill("Prezentacija", skillType2));
+			Skill skill4 = skillRepository.save(new Skill("C# programiranje", skillType1));
+			Skill skill5 = skillRepository.save(new Skill("C++ programiranje", skillType1));
+			Skill skill6 = skillRepository.save(new Skill("Relacione baze podataka", skillType1));
+			Skill skill7 = skillRepository.save(new Skill("Sigurnost", skillType3));
+			Skill skill8 = skillRepository.save(new Skill("Komunikacione vještine", skillType2));
+			Skill skill9 = skillRepository.save(new Skill("Liderstvo", skillType2));
 
 			log.info("Sve vještine \n");
 			for (Skill skill : skillRepository.findAll()) {
@@ -99,7 +106,10 @@ public class PpisProjekatApplication {
 
 			//edukacije
 			Education education1 = educationRepository.save(new Education(skill1, educationType1, "Java for Beginners", "Niko Nikic", new Date()));
-			Education education2 = educationRepository.save(new Education(skill2, educationType2, "SPA in React", "Marko Markovic", new Date()));
+			Education education2 = educationRepository.save(new Education(skill2, educationType2, "React for beginners", "Marko Markovic", new Date()));
+			Education education3 = educationRepository.save(new Education(skill7, educationType1, "Network security", "Snezana Snezic", new Date()));
+			Education education4 = educationRepository.save(new Education(skill9, educationType2, "Seminar for scrum masters", "Nina Ninic", new Date()));
+			Education education5 = educationRepository.save(new Education(skill4, educationType1, "ASP.NET 3.0", "Dino Dinic", new Date()));
 
 			log.info("Sve edukacije \n");
 			for (Education education : educationRepository.findAll()) {
@@ -110,6 +120,8 @@ public class PpisProjekatApplication {
 			//uposlenici
 			Employee employee1 = employeeRepository.save(new Employee("Ivo", "Ivic", new Date(), new Date()));
 			Employee employee2 = employeeRepository.save(new Employee("Maja", "Majic", new Date(), new Date()));
+			Employee employee3 = employeeRepository.save(new Employee("Stevo", "Stevic", new Date(), new Date()));
+			Employee employee4 = employeeRepository.save(new Employee("Ahmo", "Ahmic", new Date(), new Date()));
 
 			log.info("Svi uposlenici \n");
 			for (Employee employee : employeeRepository.findAll()) {
@@ -117,10 +129,33 @@ public class PpisProjekatApplication {
 			}
 			log.info(" ");
 
+			//Edukcije na uposlenicima
+
+			EmployeeEducation employeeEducation1 = employeeEducationRepository.save(new EmployeeEducation(employee1, education1));
+			EmployeeEducation employeeEducation2 = employeeEducationRepository.save(new EmployeeEducation(employee1, education2));
+			EmployeeEducation employeeEducation3 = employeeEducationRepository.save(new EmployeeEducation(employee1, education4));
+
+			EmployeeEducation employeeEducation4 = employeeEducationRepository.save(new EmployeeEducation(employee2, education2));
+			EmployeeEducation employeeEducation5 = employeeEducationRepository.save(new EmployeeEducation(employee2, education4));
+
+			EmployeeEducation employeeEducation7 = employeeEducationRepository.save(new EmployeeEducation(employee4, education3));
+
 			//skillovi kod uposlenika
 
 			EmployeeSkill employeeSkill1 = employeeSkillRepository.save(new EmployeeSkill(employee1, skill1, 5, new Date()));
-			EmployeeSkill employeeSkill2 = employeeSkillRepository.save(new EmployeeSkill(employee2, skill1, 10, new Date()));
+			EmployeeSkill employeeSkill2 = employeeSkillRepository.save(new EmployeeSkill(employee1, skill2, 5, new Date()));
+			EmployeeSkill employeeSkill3 = employeeSkillRepository.save(new EmployeeSkill(employee1, skill4, 3, new Date()));
+			EmployeeSkill employeeSkill4 = employeeSkillRepository.save(new EmployeeSkill(employee1, skill5, 4, new Date()));
+
+			EmployeeSkill employeeSkill5 = employeeSkillRepository.save(new EmployeeSkill(employee2, skill2, 5, new Date()));
+			EmployeeSkill employeeSkill6 = employeeSkillRepository.save(new EmployeeSkill(employee2, skill3, 5, new Date()));
+			EmployeeSkill employeeSkill7 = employeeSkillRepository.save(new EmployeeSkill(employee2, skill9, 5, new Date()));
+			EmployeeSkill employeeSkill8 = employeeSkillRepository.save(new EmployeeSkill(employee2, skill8, 4, new Date()));
+
+			EmployeeSkill employeeSkill11 = employeeSkillRepository.save(new EmployeeSkill(employee4, skill5, 5, new Date()));
+			EmployeeSkill employeeSkill12 = employeeSkillRepository.save(new EmployeeSkill(employee4, skill6, 5, new Date()));
+			EmployeeSkill employeeSkill9 = employeeSkillRepository.save(new EmployeeSkill(employee4, skill7, 3, new Date()));
+			EmployeeSkill employeeSkill10 = employeeSkillRepository.save(new EmployeeSkill(employee4, skill8, 4, new Date()));
 
 			log.info("Svi skilovi uposlenika \n");
 			for (EmployeeSkill employeeSkill : employeeSkillRepository.findAll()) {
@@ -191,7 +226,10 @@ public class PpisProjekatApplication {
 
 			//Svi certifikati
 
-			Certificate certificate1 = certificateRepository.save(new Certificate(employee1, skill3, "CISCO", new Date(), new Date()));
+			Certificate certificate1 = certificateRepository.save(new Certificate(employee1, skill7, "CISCO", new Date(), new Date()));
+			Certificate certificate2 = certificateRepository.save(new Certificate(employee1, skill1, "Oracle Certified Associate Java Programmer", new Date(), new Date()));
+
+			Certificate certificate3 = certificateRepository.save(new Certificate(employee2, skill9, "Scrum Master", new Date(), new Date()));
 		};
 	}
 

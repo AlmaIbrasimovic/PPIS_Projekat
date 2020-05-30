@@ -17,7 +17,7 @@ import { DodavanjeVjestine } from "../DodavanjeVjestine/index"
 import { Ocjene } from "../Ocjene/index"
 import { Kriteriji } from "../Kriteriji/index"
 import DropNav from '../Navigation/DropdownNavbar'
-import './style.scss'; 
+import './style.scss';
 
 class Admin extends React.Component {
     render() {
@@ -25,21 +25,13 @@ class Admin extends React.Component {
             <Router>
                 <div>
                     <AdminNavbar />
-                    <Route path="/admin/tipovi-vjestina" component={Tipovi} />
-                    <Route path="/admin/vjestine" component={Vjestine} />
-                    <Route path="/admin/dodavanje-vjestine" component={DodavanjeVjestine} />
-                    <Route path="/admin/tipovi-edukacija" component={TipoviEdukacija} />
-                    <Route path="/admin/edukacije" component={Edukacije} />
                     <Route path="/admin/korisnici" component={Korisnici} />
-                    <Route path="/admin/certifikati" component={Certifikati} />
                     <Route path="/admin/uposlenici" component={Uposlenici} />
                     <Route path="/admin/dobavljaci" component={Dobavljaci} />
                     <Route path="/admin/ugovori" component={Ugovori} />
-                    <Route path="/admin/ocjene" component={Ocjene} />
-                    <Route path="/admin/kriteriji" component={Kriteriji} />
                     <Route path="/" exact component={Login} />
                 </div>
-                <a href="/" className = "odjavaLink">Odjava</a>
+                <a href="/" className="odjavaLink">Odjava</a>
             </Router>
         )
     }
